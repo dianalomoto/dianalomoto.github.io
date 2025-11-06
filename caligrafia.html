@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendo a Escribir</title>
+    <!-- Cargar Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Cargar fuente Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilo base */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilo para el canvas de trazado */
+        #trace-canvas {
+            touch-action: none; /* Prevenir scrolling en móvil mientras se dibuja */
+            cursor: crosshair;
+            border-radius: 0.5rem;
+            border: 2px dashed #d1d5db; /* Borde gris punteado */
+        }
+        /* Estilo para el texto de guía en el canvas */
+        .guide-text-container {
+            position: relative;
+            width: 100%;
+            /* Ajustar altura basado en el ancho para un canvas cuadrado */
+            aspect-ratio: 1 / 1; 
+        }
+        #guide-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* Usar una fuente cursiva amigable */
+            font-family: 'cursive', 'Comic Sans MS', sans-serif;
+            font-size: 8rem; /* Tamaño grande para trazar */
+            color: #f3f4f6; /* Color gris muy claro */
+            -webkit-user-select: none; /* Evitar selección de texto */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none; /* No interferir con el canvas */
+        }
+        /* Ajuste de fuente para sílabas y palabras */
+        #guide-text.small {
+            font-size: 6rem;
+        }
+        #guide-text.x-small {
+            font-size: 4rem;
+        }
+
+        #trace-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <!-- Contenedor principal de la app -->
+    <div class="w-full max-w-lg bg-white rounded-xl shadow-2xl p-6 sm:p-8">
+
+        <!-- Pantalla de Menú (Inicial) -->
+        <div id="menu-screen">
+            <h1 class="text-3xl sm:text-4xl font-bold text-center text-blue-600 mb-8">
+                Aprendo a Escribir
+            </h1>
+            <div class="space-y-4">
+                <button id="start-letters-btn" class="w-full text-lg bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 px-6 rounded-lg font-bold shadow-lg transition transform hover:scale-105 hover:shadow-xl">
+                    Trazar Letras
+                </button>
+                <button id="start-syllables-btn" class="w-full text-lg bg-gradient-to-r from-green-500 to-green-600 text-white py-4 px-6 rounded-lg font-bold shadow-lg transition transform hover:scale-105 hover:shadow-xl">
+                    Trazar Sílabas
+                </button>
+                <button id="start-game-btn" class="w-full text-lg bg-gradient-to-r from-purple-500 to-purple-600 text-white py-4 px-6 rounded-lg font-bold shadow-lg transition transform hover:scale-105 hover:shadow-xl">
+                    Juego de Palabras
+                </button>
+            </div>
+        </div>
+
+        <!-- Pantalla de Trazado (Oculta) -->
+        <div id="trace-screen" class="hidden">
+            <h2 id="trace-title" class="text-2xl sm:text-3xl font-bold text-center text-gray-700 mb-4">
+                Trazar la letra...
+            </h2>
+            
+            <!-- Contenedor del Canvas y Guía -->
+            <div class="guide-text-container bg-white rounded-lg shadow-inner mb-4">
+                <!-- Texto de guía (detrás del canvas) -->
+                <div id="guide-text">S</div>
+                <!-- Canvas para dibujar -->
+                <canvas id="trace-canvas"></canvas>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="grid grid-cols-2 gap-4">
+                <button id="clear-btn" class_base="bg-yellow-500" class="w-full bg-yellow-500 text-white py-3 px-5 rounded-lg font-semibold shadow-md transition transform hover:scale-105">
+                    Borrar
+                </button>
+                <button id="next-btn" class_base="bg-green-500" class="w-full bg-green-500 text-white py-3 px-5 rounded-lg font-semibold shadow-md transition transform hover:scale-105">
+                    Siguiente
+                </button>
+            </div>
+            <button id="trace-back-btn" class="w-full mt-4 bg-gray-600 text-white py-3 px-5 rounded-lg font-semibold shadow-md transition transform hover:scale-105">
+                Volver al Menú
+            </button>
+        </div>
+
+        <!-- Pantalla de Juego de Palabras (Oculta) -->
+        <div id="game-screen" class="hidden">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center text-gray-700 mb-4">
+                ¿Qué palabra es?
+            </h2>
+            
+            <!-- Imagen del Juego -->
+            <img id="game-image" src="https://placehold.co/400x250/8FBC8F/333333?text=Sapo" alt="Imagen del juego" class="w-full h-48 sm:h-64 object-cover rounded-lg shadow-md mb-6">
+
+            <!-- Opciones del Juego -->
+            <div id="game-options" class="space-y-3">
+                <!-- Opciones se generan con JS -->
+            </div>
+            
+            <!-- Mensaje de Feedback -->
+            <p id="game-message" class="text-center font-semibold mt-4 h-6"></p>
+
+            <button id="game-back-btn" class="w-full mt-6 bg-gray-600 text-white py-3 px-5 rounded-lg font-semibold shadow-md transition transform hover:scale-105">
+                Volver al Menú
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Pie de Página -->
+    <footer class="w-full max-w-lg mx-auto text-center text-xs text-gray-500 mt-8 pb-4">
+        <p>Desarrollado por Diana Alomoto - Universidad Politécnica Estatal del Carchi</p>
+        <p>Información de contacto: 099 005 2651</p>
+        <p>email: diana.alomoto@upec.edu.ec</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Definición de Datos ---
+            const data = {
+                letters: ['S', 's'],
+                syllables: ['sa', 'se', 'si', 'so', 'su'],
+                words: [
+                    { img: 'https://placehold.co/400x250/8FBC8F/333333?text=Sapo', word: 'sapo', options: ['sapo', 'oso', 'mesa'] },
+                    { img: 'https://placehold.co/400x250/D2B48C/333333?text=Oso', word: 'oso', options: ['sopa', 'oso', 'mapa'] },
+                    { img: 'https://placehold.co/400x250/A0522D/333333?text=Mesa', word: 'mesa', options: ['pesa', 'seis', 'mesa'] },
+                    { img: 'https://placehold.co/400x250/FFD700/333333?text=6', word: 'seis', options: ['seis', 'sopa', 'sapo'] },
+                    { img: 'https://placehold.co/400x250/F0E68C/333333?text=Sopa', word: 'sopa', options: ['oso', 'sopa', 'pesa'] },
+                    { img: 'https://placehold.co/400x250/B0C4DE/333333?text=Pesa', word: 'pesa', options: ['pesa', 'mapa', 'mesa'] },
+                    { img: 'https://placehold.co/400x250/D2691E/333333?text=Mapa', word: 'mapa', options: ['mapa', 'sapo', 'seis'] }
+                ]
+            };
+
+            // --- Estado de la App ---
+            let currentView = 'menu';
+            let currentTraceMode = ''; // 'letters', 'syllables', 'words'
+            let currentIndex = 0;
+            let currentWordTrace = ''; // Para trazar la palabra del juego
+
+            // --- Elementos del DOM ---
+            const menuScreen = document.getElementById('menu-screen');
+            const traceScreen = document.getElementById('trace-screen');
+            const gameScreen = document.getElementById('game-screen');
+            
+            // Botones de Menú
+            const startLettersBtn = document.getElementById('start-letters-btn');
+            const startSyllablesBtn = document.getElementById('start-syllables-btn');
+            const startGameBtn = document.getElementById('start-game-btn');
+
+            // Elementos de Trazado
+            const traceTitle = document.getElementById('trace-title');
+            const guideText = document.getElementById('guide-text');
+            const canvas = document.getElementById('trace-canvas');
+            const clearBtn = document.getElementById('clear-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const traceBackBtn = document.getElementById('trace-back-btn');
+            const ctx = canvas.getContext('2d');
+            
+            // Elementos de Juego
+            const gameImage = document.getElementById('game-image');
+            const gameOptions = document.getElementById('game-options');
+            const gameMessage = document.getElementById('game-message');
+            const gameBackBtn = document.getElementById('game-back-btn');
+
+            // --- Variables de Canvas ---
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+
+            // --- Funciones de Navegación ---
+            function showView(viewName) {
+                menuScreen.classList.add('hidden');
+                traceScreen.classList.add('hidden');
+                gameScreen.classList.add('hidden');
+
+                if (viewName === 'menu') {
+                    menuScreen.classList.remove('hidden');
+                } else if (viewName === 'trace') {
+                    traceScreen.classList.remove('hidden');
+                } else if (viewName === 'game') {
+                    gameScreen.classList.remove('hidden');
+                }
+                currentView = viewName;
+            }
+
+            function navigateToMenu() {
+                showView('menu');
+            }
+
+            // --- Lógica de Trazado (Canvas) ---
+            
+            // Ajustar el tamaño del canvas al contenedor
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+                setupCanvasContext();
+            }
+
+            // Configurar el estilo de dibujo
+            function setupCanvasContext() {
+                ctx.strokeStyle = '#0055d4'; // Color azul para trazar
+                ctx.lineWidth = 8; // Grosor del trazo
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+            }
+
+            // Iniciar dibujo (PC)
+            canvas.addEventListener('mousedown', (e) => {
+                isDrawing = true;
+                // CORRECCIÓN: Usar clientX/Y y getBoundingClientRect para ser consistente con touch
+                const rect = canvas.getBoundingClientRect();
+                [lastX, lastY] = [e.clientX - rect.left, e.clientY - rect.top];
+            });
+
+            // Dibujar (PC)
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDrawing) {
+                    // CORRECCIÓN: Usar clientX/Y y getBoundingClientRect para ser consistente con touch
+                    const rect = canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    draw(x, y);
+                }
+            });
+
+            // Detener dibujo (PC)
+            canvas.addEventListener('mouseup', () => isDrawing = false);
+            canvas.addEventListener('mouseout', () => isDrawing = false);
+
+            // Iniciar dibujo (Móvil)
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                isDrawing = true;
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                [lastX, lastY] = [touch.clientX - rect.left, touch.clientY - rect.top];
+            });
+
+            // Dibujar (Móvil)
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (isDrawing) {
+                    const touch = e.touches[0];
+                    const rect = canvas.getBoundingClientRect();
+                    const x = touch.clientX - rect.left;
+                    const y = touch.clientY - rect.top;
+                    draw(x, y);
+                }
+            });
+
+            // Detener dibujo (Móvil)
+            canvas.addEventListener('touchend', () => isDrawing = false);
+
+            // Función principal de dibujo
+            function draw(x, y) {
+                if (!isDrawing) return;
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                [lastX, lastY] = [x, y];
+            }
+
+            // Limpiar el canvas (solo el trazo del usuario)
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            // Actualizar el texto de guía
+            function updateGuideText(text) {
+                guideText.textContent = text;
+                // Ajustar tamaño de fuente
+                guideText.classList.remove('small', 'x-small');
+                if (text.length > 3) {
+                    guideText.classList.add('x-small'); // Palabras
+                } else if (text.length > 1) {
+                    guideText.classList.add('small'); // Sílabas
+                }
+            }
+
+            // Iniciar la vista de trazado
+            function startTrace(mode) {
+                currentTraceMode = mode;
+                currentIndex = 0;
+                
+                // Ocultar botón "Siguiente" si es para trazar una palabra específica
+                if (mode === 'word') {
+                    nextBtn.classList.add('hidden');
+                    // Ajustar el grid para que el botón de borrar ocupe todo
+                    clearBtn.parentElement.classList.remove('grid-cols-2');
+                    clearBtn.parentElement.classList.add('grid-cols-1');
+                    
+                    traceTitle.textContent = '¡Traza la palabra!';
+                    updateGuideText(currentWordTrace);
+                } else {
+                    // Configuración normal para Letras y Sílabas
+                    nextBtn.classList.remove('hidden');
+                    clearBtn.parentElement.classList.add('grid-cols-2');
+                    clearBtn.parentElement.classList.remove('grid-cols-1');
+
+                    const items = data[currentTraceMode];
+                    const titlePrefix = mode === 'letters' ? 'Traza la letra:' : 'Traza la sílaba:';
+                    traceTitle.textContent = `${titlePrefix} ${items[currentIndex]}`;
+                    updateGuideText(items[currentIndex]);
+                }
+                
+                resizeCanvas(); // Ajustar tamaño del canvas
+                clearCanvas(); // Limpiar cualquier trazo anterior
+                showView('trace');
+            }
+
+            // Botón "Siguiente"
+            nextBtn.addEventListener('click', () => {
+                const items = data[currentTraceMode];
+                currentIndex = (currentIndex + 1) % items.length; // Avanzar al siguiente
+                
+                const titlePrefix = currentTraceMode === 'letters' ? 'Traza la letra:' : 'Traza la sílaba:';
+                traceTitle.textContent = `${titlePrefix} ${items[currentIndex]}`;
+                updateGuideText(items[currentIndex]);
+                clearCanvas();
+            });
+
+            // Botón "Borrar"
+            clearBtn.addEventListener('click', clearCanvas);
+
+
+            // --- Lógica del Juego de Palabras ---
+            
+            function loadGameQuestion() {
+                const item = data.words[currentIndex];
+                gameImage.src = item.img;
+                gameImage.alt = `Imagen de ${item.word}`;
+                gameMessage.textContent = '';
+                gameOptions.innerHTML = ''; // Limpiar opciones anteriores
+
+                // Barajar opciones
+                const shuffledOptions = item.options.sort(() => Math.random() - 0.5);
+
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('w-full', 'text-lg', 'bg-purple-500', 'text-white', 'py-3', 'px-5', 'rounded-lg', 'font-semibold', 'shadow-md', 'transition', 'transform', 'hover:bg-purple-600', 'hover:scale-105');
+                    button.addEventListener('click', () => checkAnswer(option, item.word));
+                    gameOptions.appendChild(button);
+                });
+            }
+
+            function checkAnswer(selectedOption, correctWord) {
+                if (selectedOption === correctWord) {
+                    gameMessage.textContent = '¡Muy bien! ¡Genial!';
+                    gameMessage.classList.remove('text-red-500');
+                    gameMessage.classList.add('text-green-500');
+
+                    // Esperar un momento y luego ir a trazar la palabra
+                    setTimeout(() => {
+                        currentWordTrace = correctWord;
+                        startTrace('word');
+                    }, 1000);
+
+                } else {
+                    gameMessage.textContent = 'Inténtalo de nuevo';
+                    gameMessage.classList.remove('text-green-500');
+                    gameMessage.classList.add('text-red-500');
+                }
+            }
+            
+            // --- Event Listeners Iniciales ---
+            
+            // Menú
+            startLettersBtn.addEventListener('click', () => startTrace('letters'));
+            startSyllablesBtn.addEventListener('click', () => startTrace('syllables'));
+            startGameBtn.addEventListener('click', () => {
+                currentIndex = 0; // Iniciar juego desde la primera palabra
+                loadGameQuestion();
+                showView('game');
+            });
+            
+            // Botones "Volver"
+            traceBackBtn.addEventListener('click', navigateToMenu);
+            gameBackBtn.addEventListener('click', () => {
+                // Si vuelves del juego, y luego vas a trazar una palabra,
+                // asegúrate de que el índice del juego se reinicie
+                // o maneje el estado de "siguiente palabra"
+                
+                // Si el modo de trazo era 'word', al volver al menú,
+                // el próximo juego debe empezar desde la palabra siguiente.
+                if(currentTraceMode === 'word') {
+                     currentIndex = (currentIndex + 1) % data.words.length;
+                }
+                navigateToMenu();
+            });
+
+            // Redimensionar canvas si la ventana cambia de tamaño
+            window.addEventListener('resize', () => {
+                if (currentView === 'trace') {
+                    resizeCanvas();
+                    // Redibujar el texto guía podría ser necesario si el tamaño cambia mucho
+                    // Pero por ahora, solo re-limpiamos.
+                    clearCanvas();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
