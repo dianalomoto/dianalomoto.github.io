@@ -290,18 +290,27 @@
                 const totalPixels = canvas.width * canvas.height;
                 const coverage = drawnPixels / totalPixels;
 
-                // Ajustar umbral según el tipo de contenido
-                let requiredCoverage = 0.05; // Para letras individuales
+                // Ajustar umbral según el tipo de contenido y modo
+                let requiredCoverage = 0.015; // Para letras individuales
+                let minStrokes = 2; // Mínimo de trazos
                 const currentText = guideText.textContent.toLowerCase();
                 
                 if (currentText.length > 3) {
-                    requiredCoverage = 0.03; // Palabras necesitan menos cobertura
+                    // Para palabras del juego, ser más estricto
+                    if (currentTraceMode === 'word') {
+                        requiredCoverage = 0.025; // Requiere más cobertura
+                        minStrokes = Math.max(4, currentText.length - 2); // Más trazos según longitud
+                    } else {
+                        requiredCoverage = 0.008;
+                        minStrokes = 3;
+                    }
                 } else if (currentText.length > 1) {
-                    requiredCoverage = 0.04; // Sílabas
+                    requiredCoverage = 0.012; // Sílabas
+                    minStrokes = 2;
                 }
 
-                // Validar trazo
-                if (coverage >= requiredCoverage && strokeCount >= 3) {
+                // Validar trazo con condiciones más flexibles
+                if (coverage >= requiredCoverage && strokeCount >= minStrokes) {
                     hasValidated = true;
                     
                     // Mostrar mensaje de éxito
