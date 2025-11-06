@@ -171,6 +171,61 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Configurar Audio Context para sonidos
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Función para reproducir sonido de éxito
+            function playSuccessSound() {
+                const now = audioContext.currentTime;
+                
+                // Crear oscilador para notas musicales alegres
+                const notes = [523.25, 659.25, 783.99]; // Do, Mi, Sol (acorde mayor alegre)
+                
+                notes.forEach((freq, index) => {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = freq;
+                    oscillator.type = 'sine';
+                    
+                    // Envelope para sonido más suave
+                    gainNode.gain.setValueAtTime(0, now + index * 0.1);
+                    gainNode.gain.linearRampToValueAtTime(0.3, now + index * 0.1 + 0.05);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + index * 0.1 + 0.4);
+                    
+                    oscillator.start(now + index * 0.1);
+                    oscillator.stop(now + index * 0.1 + 0.4);
+                });
+            }
+            
+            // Función para reproducir sonido de respuesta correcta
+            function playCorrectAnswerSound() {
+                const now = audioContext.currentTime;
+                
+                // Melodía ascendente más larga
+                const notes = [392.00, 523.25, 659.25, 783.99]; // Sol, Do, Mi, Sol
+                
+                notes.forEach((freq, index) => {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = freq;
+                    oscillator.type = 'triangle';
+                    
+                    gainNode.gain.setValueAtTime(0, now + index * 0.15);
+                    gainNode.gain.linearRampToValueAtTime(0.25, now + index * 0.15 + 0.05);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, now + index * 0.15 + 0.35);
+                    
+                    oscillator.start(now + index * 0.15);
+                    oscillator.stop(now + index * 0.15 + 0.35);
+                });
+            }
             const data = {
                 letters: ['S', 's'],
                 syllables: ['sa', 'se', 'si', 'so', 'su'],
@@ -312,6 +367,9 @@
                 // Validar trazo con condiciones más flexibles
                 if (coverage >= requiredCoverage && strokeCount >= minStrokes) {
                     hasValidated = true;
+                    
+                    // Reproducir sonido de éxito
+                    playSuccessSound();
                     
                     // Mostrar mensaje de éxito
                     successMessage.classList.remove('hidden');
@@ -482,6 +540,9 @@
                     gameMessage.textContent = '¡Muy bien! ¡Genial!';
                     gameMessage.classList.remove('text-red-500');
                     gameMessage.classList.add('text-green-500');
+                    
+                    // Reproducir sonido de respuesta correcta
+                    playCorrectAnswerSound();
                     
                     // Dar puntos por respuesta correcta
                     updateScore(5);
