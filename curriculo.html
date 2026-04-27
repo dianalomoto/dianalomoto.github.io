@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abordaje Curricular - Diana Alomoto</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/jZqMKjSS/dianalomoto.png">
+    
+    <!-- Tailwind & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- CSS Personalizado Global -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body {
+            background-color: #f8fafc; 
+            color: #1e293b;
+        }
+
+        .section-container {
+            background: white;
+            border-radius: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .materia-title {
+            color: #005c30;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .accent-bar {
+            width: 60px;
+            height: 4px;
+            background-color: #ffc600;
+            border-radius: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .image-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            height: auto;
+            background: #eee;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .enfoque-card {
+            background: #f8fafc;
+            border-top: 4px solid #005c30;
+            padding: 1.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .enfoque-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            background: white;
+        }
+
+        .eje-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            border-radius: 16px;
+            background: rgba(0, 92, 48, 0.05);
+            border-left: 5px solid #005c30;
+            transition: all 0.3s ease;
+        }
+
+        .eje-item:nth-child(even) {
+            background: rgba(255, 198, 0, 0.08);
+            border-left-color: #ffc600;
+        }
+
+        .eje-item:hover {
+            transform: translateX(10px);
+        }
+
+        .upec-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .upec-list-bullet {
+            color: #ffc600;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .btn-outline-upec {
+            border: 2px solid #005c30;
+            color: #005c30;
+            background: transparent;
+            padding: 0.9rem 1.8rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-upec:hover {
+            background: #005c30;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .video-container {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            background: black;
+            aspect-ratio: 16/9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Header con identidad UPEC -->
+    <header class="pt-32 pb-16 bg-[#005c30] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="animate-fade-up">
+                <span class="inline-flex items-center gap-2 text-[#ffc600] text-[10px] font-black uppercase tracking-[0.3em] bg-white/10 px-4 py-2 rounded-full mb-6">
+                    <i data-lucide="book-open" class="w-3.5 h-3.5"></i> Unidad de Aprendizaje 04
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight font-serif mb-4">
+                    Abordaje Pedagógico<br>
+                    <span class="text-[#ffc600] italic">Curricular en Educación Inicial</span>
+                </h1>
+                <p class="text-white/70 text-sm md:text-base max-w-2xl font-medium">
+                    Planificación, implementación y evaluación de procesos educativos centrados en el desarrollo integral del infante.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-16">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            
+            <!-- SECCIÓN 01: DEFINICIÓN -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-up">
+                    <div class="accent-bar"></div>
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">01.</span> Definición
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base space-y-4 text-justify">
+                        <p>
+                            El abordaje pedagógico curricular para Educación Inicial hace referencia al conjunto de enfoques, metodologías y marcos teóricos que orientan la planificación de los procesos educativos en la primera infancia. 
+                        </p>
+                        <p>
+                            De acuerdo con <span class="font-bold text-[#005c30]">Peralta Espinosa y Fujimoto Gómez (2020)</span>, el currículo de Educación Inicial debe entenderse como una propuesta integral que articula el desarrollo del niño con las intenciones pedagógicas del educador, promoviendo el desarrollo integral en todas sus dimensiones.
+                        </p>
+                    </div>
+                </div>
+                <div class="animate-fade-up" style="animation-delay: 0.2s;">
+                    <div class="image-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjJuAyE5ViHAxSAorzeL8anx9bVlpB2AC8b8ATFt8Yj88OideefqX8UL3Bn5o6Hxaa7CCR5pCjZyCaPHbb4ku5HaqOykmqoBao5POC-QmyEPB_GFA-YxWd_UPDk-18rOVcEcvIFdcN7sAtdnX5ElgocLoNZPmGhM1BSpIrJZqB9rJ4BXcYtx3IMBWSbKc8g/w800/seccion-kids1-min.png" alt="[Imagen de niños aprendiendo]">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 02: ENFOQUES PEDAGÓGICOS -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h2 class="text-3xl font-black materia-title mb-8 flex items-center gap-3">
+                    <span class="text-[#ffc600]">02.</span> Enfoques Pedagógicos Relevantes
+                </h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="enfoque-card">
+                        <div class="w-12 h-12 bg-[#005c30]/10 text-[#005c30] rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="git-branch" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-[#005c30] text-sm mb-2">Constructivismo</h4>
+                        <p class="text-gray-500 text-xs">Jean Piaget: El aprendizaje se basa en la acción del niño sobre su entorno físico y social.</p>
+                    </div>
+                    <div class="enfoque-card" style="border-top-color: #ffc600;">
+                        <div class="w-12 h-12 bg-[#ffc600]/10 text-[#c9a000] rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="users-2" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-[#c9a000] text-sm mb-2">Histórico-Cultural</h4>
+                        <p class="text-gray-500 text-xs">Vygotski: Importancia de la interacción social y la zona de desarrollo próximo.</p>
+                    </div>
+                    <div class="enfoque-card">
+                        <div class="w-12 h-12 bg-[#005c30]/10 text-[#005c30] rounded-xl flex items-center justify-center mb-4">
+                            <i data-lucide="ear" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-[#005c30] text-sm mb-2">Pedagogía de la Escucha</h4>
+                        <p class="text-gray-500 text-xs">Reggio Emilia: Expresión e investigación infantil como motores del aprendizaje.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 03: EL CURRÍCULO EN ECUADOR -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 animate-fade-up">
+                    <div class="image-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjDhqKoZ3NW3XW3hMDTVBGyCwcrYypUg8XaEHEkmIqAun-pipdESSchWYwazFEp7K15YVx8V4Asx2E75amo-4S-IiRz74RZdiy-fc7roxjVhhFUOF_YWZdOgugTqoIDQYLtXlWakMj38R3F5NUGWUyKrm6Xm3zb4JPjVSzsowEIkz1cJB9Dwf-JTOHoEHbN/s1600/images.jpeg" alt="[Imagen del currículo escolar]">
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 animate-fade-up">
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">03.</span> Currículo en Ecuador
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base space-y-6">
+                        <p class="text-justify">
+                            El Currículo de Educación Inicial del Ecuador (<span class="font-bold">Ministerio de Educación, 2022</span>) se organiza en dos subniveles y adopta un enfoque de derechos, intercultural e inclusivo.
+                        </p>
+                        <div class="space-y-3">
+                            <div class="eje-item">
+                                <span class="font-black text-xl text-[#005c30]">01</span>
+                                <p class="font-bold text-xs uppercase tracking-wider">Desarrollo Personal y Social</p>
+                            </div>
+                            <div class="eje-item">
+                                <span class="font-black text-xl text-[#ffc600]">02</span>
+                                <p class="font-bold text-xs uppercase tracking-wider">Descubrimiento Natural y Cultural</p>
+                            </div>
+                            <div class="eje-item">
+                                <span class="font-black text-xl text-[#005c30]">03</span>
+                                <p class="font-bold text-xs uppercase tracking-wider">Expresión y Comunicación</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 04: PLANIFICACIÓN -->
+            <section class="bg-[#f0f9f4] p-8 md:p-14 rounded-[48px] border-l-8 border-[#005c30] animate-fade-up">
+                <div class="max-w-4xl">
+                    <h3 class="text-2xl font-black text-[#005c30] uppercase tracking-widest mb-6 flex items-center gap-3">
+                        <i data-lucide="clipboard-list" class="text-[#ffc600] w-6 h-6"></i> Planificación Curricular
+                    </h3>
+                    <p class="text-gray-700 text-sm md:text-base leading-relaxed text-justify mb-4">
+                        <span class="font-bold">Zabalza Beraza (2021)</span> señala que una planificación efectiva debe partir del diagnóstico del grupo, definir objetivos claros y seleccionar estrategias pertinentes.
+                    </p>
+                    <p class="italic text-gray-600 border-l-4 border-slate-300 pl-4 text-sm">
+                        "La planificación se expresa a través de proyectos de aula, rincones de aprendizaje y experiencias de juego dirigido que integran los ámbitos del currículo."
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 05: MATERIAL AUDIOVISUAL -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black materia-title mb-4">Material de Apoyo</h2>
+                    <div class="w-20 h-1.5 bg-[#ffc600] mx-auto rounded-full"></div>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="video-container group">
+                        <iframe src="https://www.youtube.com/embed/CYJW9crLON0" class="w-full h-full opacity-90 group-hover:opacity-100 transition-opacity" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <p class="mt-6 text-center text-gray-400 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 italic">
+                        <i data-lucide="youtube" class="text-red-600"></i> Video: Generalidades del Currículo Ecuador
+                    </p>
+                </div>
+            </section>
+
+            <!-- BIBLIOGRAFÍA -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h4 class="text-[#005c30] font-black text-xs uppercase tracking-[0.3em] mb-8 flex items-center gap-3">
+                    <i data-lucide="book-open" class="text-[#ffc600]"></i> Bibliografía de la Unidad
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6 text-[11px] md:text-xs text-gray-500 leading-relaxed">
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Bralic, S., y Mercer, R. (2021). <em>Educación inicial y pedagogía crítica en América Latina: Enfoques y desafíos.</em> FLACSO.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Ministerio de Educación del Ecuador. (2022). <em>Currículo de Educación Inicial (actualización 2022).</em> Ministerio de Educación.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Peralta Espinosa, M. V., y Fujimoto Gómez, G. (2020). <em>La atención integral de la primera infancia en América Latina</em> (2.ª ed.). OEA.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Zabalza Beraza, M. Á. (2021). <em>Didáctica de la Educación Infantil</em> (5.ª ed.). Narcea.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NAVEGACIÓN INFERIOR -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-center gap-6">
+                <a href="inclusion" class="btn-outline-upec justify-center">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver a Inclusión
+                </a>
+                <a href="lenguaje" class="btn-primary px-10 py-4 rounded-full justify-center">
+                    Siguiente: Lenguaje <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Contenedor del Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts Globales -->
+    <script src="main.js"></script>
+</body>
+</html>

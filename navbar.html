@@ -1,0 +1,50 @@
+<nav id="main-nav" class="fixed w-full top-0 z-50 transition-all duration-500" style="background: linear-gradient(135deg, rgba(0, 74, 38, 0.98) 0%, rgba(0, 92, 48, 0.98) 100%); border-bottom: 3px solid #ffc600;">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-50">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-3 group">
+            <img src="https://i.ibb.co/jZqMKjSS/dianalomoto.png" alt="Logo" class="h-12 w-auto group-hover:scale-110 transition-transform duration-300">
+            <div class="hidden sm:block border-l border-white/20 pl-4 leading-tight">
+                <span class="block text-white font-serif font-black text-xl uppercase tracking-tight">Diana Alomoto</span>
+                <span class="block text-[#ffc600] text-[9px] font-bold uppercase tracking-[0.2em]">UPEC · Educación Inicial</span>
+            </div>
+        </a>
+
+        <!-- Menú Desktop -->
+        <div class="hidden lg:flex items-center gap-10">
+            <a href="/" class="nav-link"><i data-lucide="home"></i> Inicio</a>
+            <a href="recursos" class="nav-link"><i data-lucide="monitor"></i> Recursos</a>
+            <a href="puericultura" class="nav-link"><i data-lucide="heart"></i> Puericultura</a>
+            <a href="inclusion" class="nav-link"><i data-lucide="users"></i> Inclusión</a>
+            <a href="curriculo" class="nav-link"><i data-lucide="book-open"></i> Currículo</a>
+            <a href="lenguaje" class="nav-link"><i data-lucide="message-circle"></i> Lenguaje</a>
+        </div>
+
+        <!-- Botón Menú Móvil -->
+        <button class="lg:hidden text-white p-3 hover:bg-white/10 rounded-full transition-colors relative z-[110]" onclick="toggleMobileMenu()">
+            <i data-lucide="menu" id="menu-icon-trigger"></i>
+        </button>
+    </div>
+
+    <!-- Menú Móvil Full Screen - Corregido con h-screen y fondo sólido -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 h-screen w-screen bg-[#004a26] z-[100] flex flex-col items-center justify-center translate-x-full transition-transform duration-500 ease-in-out lg:hidden">
+        <!-- Botón Cerrar -->
+        <button class="absolute top-6 right-6 text-white p-3 hover:bg-white/10 rounded-full" onclick="toggleMobileMenu()">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+
+        <div class="flex flex-col items-center gap-8 w-full px-10">
+            <img src="https://i.ibb.co/jZqMKjSS/dianalomoto.png" alt="Logo" class="h-20 w-auto mb-4">
+            
+            <a href="/" class="mobile-nav-link" onclick="toggleMobileMenu()"><i data-lucide="home"></i> Inicio</a>
+            <a href="recursos" class="mobile-nav-link" onclick="toggleMobileMenu()"><i data-lucide="monitor"></i> Recursos Digitales</a>
+            <a href="puericultura" class="mobile-nav-link" onclick="toggleMobileMenu()"><i data-lucide="heart"></i> Puericultura Infantil</a>
+            <a href="inclusion" class="mobile-nav-link" onclick="toggleMobileMenu()"><i data-lucide="users"></i> Inclusión Educativa</a>
+            <a href="curriculo" class="mobile-nav-link" onclick="toggleMobileMenu()"><i data-lucide="book-open"></i> Abordaje Curricular</a>
+            <a href="lenguaje" class="mobile-nav-link" onclick="toggleMobileMenu()"><i data-lucide="message-circle"></i> Pensamiento y Lenguaje</a>
+            
+            <div class="mt-8 pt-8 border-t border-white/10 w-full text-center">
+                <p class="text-[#ffc600] text-[10px] font-black uppercase tracking-widest">Diana Alomoto · UPEC</p>
+            </div>
+        </div>
+    </div>
+</nav>

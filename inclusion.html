@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inclusión Educativa - Diana Alomoto</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/jZqMKjSS/dianalomoto.png">
+    
+    <!-- Tailwind & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- CSS Personalizado Global -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body {
+            background-color: #f8fafc; 
+            color: #1e293b;
+        }
+
+        .section-container {
+            background: white;
+            border-radius: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .materia-title {
+            color: #005c30;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .accent-bar {
+            width: 60px;
+            height: 4px;
+            background-color: #ffc600;
+            border-radius: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .image-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            height: auto;
+            background: #eee;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .upec-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .upec-list-bullet {
+            color: #ffc600;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .btn-outline-upec {
+            border: 2px solid #005c30;
+            color: #005c30;
+            background: transparent;
+            padding: 0.9rem 1.8rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-upec:hover {
+            background: #005c30;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .video-container {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            background: black;
+            aspect-ratio: 16/9;
+        }
+
+        /* Estilo para los bloques de principios */
+        .principio-card {
+            padding: 1.5rem;
+            border-radius: 20px;
+            border-left: 5px solid #005c30;
+            background: #f8fafc;
+            transition: all 0.3s ease;
+        }
+
+        .principio-card:nth-child(even) {
+            border-left-color: #ffc600;
+        }
+
+        .principio-card:hover {
+            transform: translateX(10px);
+            background: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Header con identidad UPEC -->
+    <header class="pt-32 pb-16 bg-[#005c30] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="animate-fade-up">
+                <span class="inline-flex items-center gap-2 text-[#ffc600] text-[10px] font-black uppercase tracking-[0.3em] bg-white/10 px-4 py-2 rounded-full mb-6">
+                    <i data-lucide="users" class="w-3.5 h-3.5"></i> Unidad de Aprendizaje 03
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight font-serif mb-4">
+                    Inclusión Educativa<br>
+                    <span class="text-[#ffc600] italic">en el Nivel Inicial</span>
+                </h1>
+                <p class="text-white/70 text-sm md:text-base max-w-2xl font-medium">
+                    Garantizando el acceso, la participación y el aprendizaje de todos los estudiantes desde la diversidad.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-16">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            
+            <!-- SECCIÓN 01: DEFINICIÓN -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-up">
+                    <div class="accent-bar"></div>
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">01.</span> Definición
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base space-y-4 text-justify">
+                        <p>
+                            La inclusión educativa es el proceso mediante el cual el sistema educativo garantiza el acceso, la participación y el aprendizaje de todos los estudiantes, independientemente de sus capacidades, origen cultural, género o condición socioeconómica. 
+                        </p>
+                        <p>
+                            <span class="font-bold text-[#005c30]">Ainscow y Booth (2021)</span> la definen como el conjunto de procesos orientados a aumentar la participación de los estudiantes en la cultura, el currículo y las comunidades de las escuelas locales, implicando reducir activamente cualquier forma de exclusión. En el nivel inicial, esto sienta las bases de una trayectoria escolar equitativa.
+                        </p>
+                    </div>
+                </div>
+                <div class="animate-fade-up" style="animation-delay: 0.2s;">
+                    <div class="image-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzDda6wKU6EDvGSaN5AaFXdI0rmtiNrqMKPZBbsuHu2e9jR6lII2pk9kOQ5MSWyoHD_7IFq34cN1bjkk2ENSYNSkiqK5g9IyLAr5lIE5aKvSoc_Fsd5aAo14NDY3ymhArlyX8V-4UoZZC27Iinmik7UXL2nFVI2u7Dg6uTz-bUPbEJMRHXcZHk2KAkXnpm/w800/inclusion-min-1024x682.jpg" alt="[Imagen de inclusión educativa]">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 02: PRINCIPIOS -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                    <span class="text-[#ffc600]">02.</span> Principios Fundamentales
+                </h2>
+                <p class="text-gray-600 mb-10 text-sm md:text-base text-justify">
+                    De acuerdo con la <span class="font-bold">UNESCO (2020)</span>, los principios que fundamentan la educación inclusiva permiten transformar los sistemas educativos para responder a la diversidad:
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="principio-card">
+                        <p class="font-black text-[#005c30] text-sm mb-1 uppercase tracking-tighter">Equidad</p>
+                        <p class="text-gray-500 text-xs">Distribución justa de recursos y oportunidades educativas para todos.</p>
+                    </div>
+                    <div class="principio-card">
+                        <p class="font-black text-[#005c30] text-sm mb-1 uppercase tracking-tighter">Participación</p>
+                        <p class="text-gray-500 text-xs">Voz activa de todos los estudiantes en el proceso y cultura escolar.</p>
+                    </div>
+                    <div class="principio-card">
+                        <p class="font-black text-[#005c30] text-sm mb-1 uppercase tracking-tighter">Diversidad</p>
+                        <p class="text-gray-500 text-xs">Reconocida como un valor positivo que enriquece a la comunidad.</p>
+                    </div>
+                    <div class="principio-card">
+                        <p class="font-black text-[#005c30] text-sm mb-1 uppercase tracking-tighter">Pertinencia</p>
+                        <p class="text-gray-500 text-xs">Adaptar el currículo a las necesidades y contextos individuales.</p>
+                    </div>
+                    <div class="principio-card md:col-span-2">
+                        <p class="font-black text-[#005c30] text-sm mb-1 uppercase tracking-tighter">Calidad</p>
+                        <p class="text-gray-500 text-xs">Asegurar estándares altos de aprendizaje para todos los estudiantes sin excepción.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 03: ESTRATEGIAS -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 animate-fade-up">
+                    <div class="image-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgsNjPkv-sWF9EBzKAfG7rXRHcQ8ZyL4KCspzTkSk8zGXGslbT0juxvrtQXbSMajiDyP3D3fcKmPqnKT-3hpLZkN6jGtWF3Tg9bif0aVL8AeGLZqs4Z83NzqmlTQcRneEJWnsO6-NaEswNcRU_exrampdV2qw67PlVX_YNJsCXfYdsoWQIrA3FCqjqBN1ax/w800/image_DUA-01.webp" alt="[Imagen de estrategias DUA]">
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 animate-fade-up">
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">03.</span> Estrategias en el Aula
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base space-y-4 text-justify">
+                        <p>
+                            <span class="font-bold text-[#005c30]">Arnáiz Sánchez (2021)</span> sugiere el uso del Diseño Universal para el Aprendizaje (DUA), que consiste en planificar desde el inicio materiales y actividades accesibles para todos.
+                        </p>
+                        <p>Otras estrategias fundamentales incluyen:</p>
+                        <ul class="upec-list ml-2">
+                            <li><span class="upec-list-bullet">✓</span> <p>Aprendizaje cooperativo y tutoría entre iguales.</p></li>
+                            <li><span class="upec-list-bullet">✓</span> <p>Diferenciación curricular y ajustes razonables.</p></li>
+                            <li><span class="upec-list-bullet">✓</span> <p>Sistemas aumentativos y alternativos de comunicación.</p></li>
+                            <li><span class="upec-list-bullet">✓</span> <p>Colaboración estrecha con equipos interdisciplinarios.</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 04: MARCO LEGAL -->
+            <section class="bg-[#f0f9f4] p-8 md:p-14 rounded-[48px] border-l-8 border-[#005c30] animate-fade-up">
+                <div class="max-w-4xl">
+                    <h3 class="text-2xl font-black text-[#005c30] uppercase tracking-widest mb-6 flex items-center gap-3">
+                        <i data-lucide="scale" class="text-[#ffc600] w-6 h-6"></i> Marco Legal en Ecuador
+                    </h3>
+                    <div class="text-gray-700 text-sm md:text-base leading-relaxed text-justify space-y-4">
+                        <p>
+                            La Constitución de la República (2008) establece la educación como un derecho irrenunciable, mientras que la <strong>Ley Orgánica de Educación Intercultural (LOEI, 2011)</strong> obliga a las instituciones a garantizar la inclusión.
+                        </p>
+                        <p class="italic">
+                            "El Ministerio de Educación (2023) promueve el Modelo de Educación Inclusiva para asegurar que cada infante reciba una atención pedagógica de calidad acorde a su condición."
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 05: MATERIAL AUDIOVISUAL -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black materia-title mb-4">Recursos de Profundización</h2>
+                    <div class="w-20 h-1.5 bg-[#ffc600] mx-auto rounded-full"></div>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="video-container group">
+                        <iframe src="https://www.youtube.com/embed/dD0KZ9g8c_0" class="w-full h-full opacity-90 group-hover:opacity-100 transition-opacity" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <p class="mt-6 text-center text-gray-400 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 italic">
+                        <i data-lucide="youtube" class="text-red-600"></i> Video: Inclusión Educativa en el Nivel Inicial
+                    </p>
+                </div>
+            </section>
+
+            <!-- BIBLIOGRAFÍA -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h4 class="text-[#005c30] font-black text-xs uppercase tracking-[0.3em] mb-8 flex items-center gap-3">
+                    <i data-lucide="book-open" class="text-[#ffc600]"></i> Bibliografía de la Unidad
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6 text-[11px] md:text-xs text-gray-500 leading-relaxed">
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Ainscow, M., y Booth, T. (2021). <em>Guía para la educación inclusiva: Desarrollando el aprendizaje y la participación.</em> OEI-FUHEM.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Arnáiz Sánchez, P. (2021). <em>Educación inclusiva: Una escuela para todos.</em> Aljibe.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>UNESCO. (2020). <em>Educación inclusiva: De la retórica a la práctica.</em> UNESCO.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Ministerio de Educación del Ecuador. (2023). <em>Modelo de educación inclusiva.</em> Ministerio de Educación.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl md:col-span-2">
+                        <p>Constitución de la República del Ecuador. (2008). Registro Oficial 449 de 20-oct.-2008. Asamblea Nacional.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NAVEGACIÓN INFERIOR -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-center gap-6">
+                <a href="puericultura" class="btn-outline-upec justify-center">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver a Puericultura
+                </a>
+                <a href="curriculo" class="btn-primary px-10 py-4 rounded-full justify-center">
+                    Siguiente: Currículo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Contenedor del Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts Globales -->
+    <script src="main.js"></script>
+</body>
+</html>

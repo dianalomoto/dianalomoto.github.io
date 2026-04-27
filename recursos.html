@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos Digitales - Diana Alomoto</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/jZqMKjSS/dianalomoto.png">
+    
+    <!-- Tailwind & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- CSS Personalizado Global -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Estilos específicos de esta página (los globales ya están en style.css) */
+        body {
+            background-color: #f8fafc; 
+            color: #1e293b;
+        }
+
+        .section-container {
+            background: white;
+            border-radius: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .materia-title {
+            color: #005c30;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .accent-bar {
+            width: 60px;
+            height: 4px;
+            background-color: #ffc600;
+            border-radius: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .image-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            height: auto;
+            background: #eee;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .upec-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .upec-list-bullet {
+            color: #ffc600;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .btn-outline-upec {
+            border: 2px solid #005c30;
+            color: #005c30;
+            background: transparent;
+            padding: 0.9rem 1.8rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-upec:hover {
+            background: #005c30;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .video-container {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            background: black;
+            aspect-ratio: 16/9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Header con identidad UPEC -->
+    <header class="pt-32 pb-16 bg-[#005c30] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="animate-fade-up">
+                <span class="inline-flex items-center gap-2 text-[#ffc600] text-[10px] font-black uppercase tracking-[0.3em] bg-white/10 px-4 py-2 rounded-full mb-6">
+                    <i data-lucide="monitor" class="w-3.5 h-3.5"></i> Unidad de Aprendizaje 01
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight font-serif mb-4">
+                    Diseño de Recursos<br>
+                    <span class="text-[#ffc600] italic">Digitales de Aprendizaje</span>
+                </h1>
+                <p class="text-white/70 text-sm md:text-base max-w-2xl font-medium">
+                    Exploración académica sobre la integración de tecnologías en el currículo de Educación Inicial.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-16">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            
+            <!-- SECCIÓN 01: DEFINICIÓN -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-up">
+                    <div class="accent-bar"></div>
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">01.</span> Definición
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base space-y-4 text-justify">
+                        <p>
+                            El diseño de recursos digitales de aprendizaje se entiende como el proceso planificado e intencional de crear, organizar y estructurar materiales educativos en formatos digitales, con el propósito de facilitar la adquisición de conocimientos, habilidades y actitudes. Según <span class="font-bold text-[#005c30]">Morales y Torres (2021)</span>, implica la integración de principios pedagógicos con herramientas tecnológicas para generar experiencias de aprendizaje significativas, accesibles y adaptadas a las necesidades del aprendiz.
+                        </p>
+                        <p>
+                            En el contexto de la educación inicial, estos recursos permiten al docente complementar las estrategias presenciales con materiales atractivos que estimulan la motivación y el aprendizaje activo. <span class="font-bold text-[#005c30]">Cabero Almenara (2020)</span> señala que los recursos digitales educativos se caracterizan por ser interactivos, reutilizables y capaces de adaptarse a distintos ritmos y estilos de aprendizaje.
+                        </p>
+                    </div>
+                </div>
+                <div class="animate-fade-up" style="animation-delay: 0.2s;">
+                    <div class="image-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiV8jBW8MC53SlDzKzFTVFM1RkdFf72cQA8jsdM32SjPJlxwdxSEpgsmA_Uy2NHCcXLxU0t0cncIb94guRyGqm_HLmumwEA1Wr9VbLR_8DllVDLFgvaC9YVw8WD91ea3FN8tx9K89Ib8TXHshJYBBdbC6in7Vuwh1L5yiR6J0Q8vLFfCTpOj_TluJSm_zsx/w800/shutterstock_1795173940.jpg" alt="[Imagen de recursos digitales]">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 02: CARACTERÍSTICAS -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                    <span class="text-[#ffc600]">02.</span> Características Principales
+                </h2>
+                <p class="text-gray-600 mb-10 text-sm md:text-base text-justify">
+                    Los recursos digitales de aprendizaje presentan características que los distinguen de los materiales tradicionales. <span class="font-bold">Prendes Espinosa (2022)</span> destaca que estos recursos favorecen la retroalimentación inmediata, elemento clave para la autorregulación del aprendizaje:
+                </p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="flex flex-col items-center text-center p-8 rounded-3xl bg-slate-50 border border-slate-100 group transition-all hover:bg-white hover:border-[#ffc600]">
+                        <div class="w-14 h-14 bg-[#005c30] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:rotate-6 transition-transform">
+                            <i data-lucide="zap" class="w-7 h-7"></i>
+                        </div>
+                        <h4 class="font-black text-[#005c30] mb-3 uppercase text-[10px] tracking-widest">Interactividad</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed">Participación activa del estudiante en tiempo real.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-8 rounded-3xl bg-slate-50 border border-slate-100 group transition-all hover:bg-white hover:border-[#ffc600]">
+                        <div class="w-14 h-14 bg-[#005c30] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:rotate-6 transition-transform">
+                            <i data-lucide="layers" class="w-7 h-7"></i>
+                        </div>
+                        <h4 class="font-black text-[#005c30] mb-3 uppercase text-[10px] tracking-widest">Multimedialidad</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed">Combinación equilibrada de audio, texto y video.</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center p-8 rounded-3xl bg-slate-50 border border-slate-100 group transition-all hover:bg-white hover:border-[#ffc600]">
+                        <div class="w-14 h-14 bg-[#005c30] text-white rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:rotate-6 transition-transform">
+                            <i data-lucide="globe" class="w-7 h-7"></i>
+                        </div>
+                        <h4 class="font-black text-[#005c30] mb-3 uppercase text-[10px] tracking-widest">Accesibilidad</h4>
+                        <p class="text-gray-500 text-xs leading-relaxed">Disponibilidad en cualquier momento y dispositivo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 03: TIPOS DE RECURSOS -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 animate-fade-up">
+                    <div class="image-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiirRkh7rIU3LGP-jTTvadEsDQjbsvuHNpu6IDOrbBCckZbzuTnPTgqZnIzoQToVLhFxrCIhCllySmLGeBOgyrNqm2bt-F9VEGnnTxMxNWWyftK3MQIH8AfGU-kMAAEX8TeLhmwiYrQrXK29eqk00tFmBL1ZGwjoTfCzEW6AS3nekCU_g1B-gLIdO16QUgS/w800/herramientas-digitales.webp" alt="[Imagen de herramientas digitales]">
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 animate-fade-up">
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">03.</span> Tipos de Recursos
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        <p class="mb-4">
+                            <span class="font-bold text-[#005c30]">García Valcárcel (2020)</span> los clasifica en cuatro categorías fundamentales:
+                        </p>
+                        <ul class="upec-list ml-2 mb-6 text-justify">
+                            <li><span class="upec-list-bullet">a)</span> <p><strong>Objetos de aprendizaje:</strong> Unidades autocontenidas con un objetivo pedagógico definido.</p></li>
+                            <li><span class="upec-list-bullet">b)</span> <p><strong>Simulaciones y entornos virtuales:</strong> Espacios digitales que recrean situaciones reales para la práctica.</p></li>
+                            <li><span class="upec-list-bullet">c)</span> <p><strong>Recursos multimedia interactivos:</strong> Presentaciones, infografías, videos educativos y materiales visuales dinámicos.</p></li>
+                            <li><span class="upec-list-bullet">d)</span> <p><strong>Plataformas de gestión del aprendizaje (LMS):</strong> Sistemas que articulan múltiples recursos en un entorno digital integrado.</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 04: IMPORTANCIA -->
+            <section class="bg-[#f0f9f4] p-8 md:p-14 rounded-[48px] border-l-8 border-[#005c30] animate-fade-up">
+                <div class="max-w-4xl">
+                    <h3 class="text-2xl font-black text-[#005c30] uppercase tracking-widest mb-6 flex items-center gap-3">
+                        <i data-lucide="award" class="text-[#ffc600] w-6 h-6"></i> Importancia Pedagógica
+                    </h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify italic">
+                        "En el nivel de Educación Inicial, la integración de recursos digitales debe responder a los ejes del desarrollo y aprendizaje establecidos en el currículo nacional, garantizando experiencias lúdicas, creativas y culturalmente pertinentes." — <span class="font-bold text-[#005c30]">Ministerio de Educación del Ecuador (2022)</span>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 05: MATERIAL AUDIOVISUAL -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black materia-title mb-4">Material de Apoyo Audiovisual</h2>
+                    <div class="w-20 h-1.5 bg-[#ffc600] mx-auto rounded-full"></div>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="video-container group">
+                        <iframe src="https://www.youtube.com/embed/Ae5n33PC2kk" class="w-full h-full opacity-90 group-hover:opacity-100 transition-opacity" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <p class="mt-6 text-center text-gray-400 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 italic">
+                        <i data-lucide="youtube" class="text-red-600"></i> Video: 12 herramientas educativas digitales para mejorar el aprendizaje
+                    </p>
+                </div>
+            </section>
+
+            <!-- BIBLIOGRAFÍA -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h4 class="text-[#005c30] font-black text-xs uppercase tracking-[0.3em] mb-8 flex items-center gap-3">
+                    <i data-lucide="book-open" class="text-[#ffc600]"></i> Bibliografía de la Unidad
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6 text-[11px] md:text-xs text-gray-500 leading-relaxed">
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Cabero Almenara, J. (2020). Aprendiendo del tiempo de la COVID-19. <em>Revista Electrónica de Tecnología Educativa, (73)</em>, 1–13.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Ministerio de Educación del Ecuador. (2022). <em>Currículo de Educación Inicial 2022.</em> Ministerio de Educación.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Morales, P., y Torres, R. (2021). <em>Diseño instruccional y recursos digitales: Una perspectiva contemporánea.</em> UNED.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Prendes Espinosa, M. P. (2022). <em>Tecnología educativa: Diseño y producción de medios para la enseñanza.</em> Pirámide.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl md:col-span-2">
+                        <p>García Valcárcel, A. (2020). <em>Recursos digitales para la mejora de la enseñanza y el aprendizaje.</em> Universidad de Salamanca.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NAVEGACIÓN INFERIOR -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-center gap-6">
+                <a href="/" class="btn-outline-upec justify-center">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver al Inicio
+                </a>
+                <a href="puericultura" class="btn-primary px-10 py-4 rounded-full justify-center">
+                    Siguiente: Puericultura <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Contenedor del Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts Globales -->
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Referencias - Diana Alomoto</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/jZqMKjSS/dianalomoto.png">
+    
+    <!-- Tailwind & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- CSS Personalizado Global -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body {
+            background-color: #f8fafc; 
+            color: #1e293b;
+        }
+
+        .section-container {
+            background: white;
+            border-radius: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: #64748b;
+        }
+
+        .filter-btn.active {
+            background: #005c30;
+            color: white;
+            border-color: #005c30;
+            box-shadow: 0 10px 20px rgba(0, 92, 48, 0.2);
+        }
+
+        .ref-card {
+            padding: 1.5rem;
+            border-radius: 20px;
+            background: #f8fafc;
+            border-left: 4px solid #e2e8f0;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .ref-card:hover {
+            background: white;
+            border-left-color: #ffc600;
+            transform: translateX(8px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .unit-badge {
+            font-size: 9px;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: #005c30;
+            color: white;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Header -->
+    <header class="pt-32 pb-16 bg-[#005c30] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="animate-fade-up">
+                <span class="inline-flex items-center gap-2 text-[#ffc600] text-[10px] font-black uppercase tracking-[0.3em] bg-white/10 px-4 py-2 rounded-full mb-6">
+                    <i data-lucide="book-marked" class="w-3.5 h-3.5"></i> Repositorio Bibliográfico
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight font-serif mb-4">
+                    Referencias<br>
+                    <span class="text-[#ffc600] italic">Académicas del Semestre</span>
+                </h1>
+                <p class="text-white/70 text-sm md:text-base max-w-2xl font-medium">
+                    Consolidado de fuentes y autores que fundamentan los aprendizajes del tercer semestre de Educación Inicial.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            
+            <!-- Controles de Filtrado -->
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 mb-12 bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-[#ffc600]/10 rounded-full flex items-center justify-center text-[#c9a000]">
+                        <i data-lucide="filter" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-800 text-sm">Organizar Bibliografía</h3>
+                        <p class="text-slate-400 text-[10px] uppercase font-black tracking-widest">Elige el modo de visualización</p>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="changeFilter('unidad')" id="btn-unidad" class="filter-btn active">Por Unidades</button>
+                    <button onclick="changeFilter('alfabetico')" id="btn-alfabetico" class="filter-btn">Orden Alfabético</button>
+                </div>
+            </div>
+
+            <!-- Contenedor Dinámico de Referencias -->
+            <div id="refs-container" class="space-y-12">
+                <!-- El contenido se genera con JavaScript -->
+            </div>
+
+            <!-- Botón Volver -->
+            <div class="mt-16 text-center">
+                <a href="/" class="btn-primary inline-flex px-12 py-4 rounded-full">
+                    <i data-lucide="home" class="w-4 h-4"></i> Finalizar Recorrido
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Contenedor del Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+    <script>
+        // Datos de todas las unidades
+        const bibliografia = [
+            // UNIDAD 1
+            { unit: "Unidad 01", author: "Morales, P., y Torres, R.", year: 2021, text: "Morales, P., y Torres, R. (2021). Diseño instruccional y recursos digitales: Una perspectiva pedagógica contemporánea. Ediciones UNED.", sortKey: "Morales" },
+            { unit: "Unidad 01", author: "Cabero Almenara, J.", year: 2020, text: "Cabero Almenara, J. (2020). Aprendiendo del tiempo de la COVID-19: Reflexiones para la educación tecnológica. Revista Electrónica de Tecnología Educativa, (73), 1–13.", sortKey: "Cabero" },
+            { unit: "Unidad 01", author: "García Valcárcel, A.", year: 2020, text: "García Valcárcel, A. (2020). Recursos digitales para la mejora de la enseñanza y el aprendizaje. Universidad de Salamanca.", sortKey: "Garcia" },
+            { unit: "Unidad 01", author: "Prendes Espinosa, M. P.", year: 2022, text: "Prendes Espinosa, M. P. (2022). Tecnología educativa: Diseño y producción de medios para la enseñanza (3.ª ed.). Pirámide.", sortKey: "Prendes" },
+            { unit: "Unidad 01", author: "Ministerio de Educación", year: 2022, text: "Ministerio de Educación del Ecuador. (2022). Currículo de Educación Inicial 2022. Ministerio de Educación.", sortKey: "Ministerio" },
+            
+            // UNIDAD 2
+            { unit: "Unidad 02", author: "Álvarez Gómez, M.", year: 2020, text: "Álvarez Gómez, M., y Muñoz Cano, J. M. (2020). Puericultura: Fundamentos y aplicaciones en la atención infantil (2.ª ed.). Manual Moderno.", sortKey: "Alvarez" },
+            { unit: "Unidad 02", author: "Coronado Velasco, C.", year: 2021, text: "Coronado Velasco, C. (2021). Enfermería pediátrica y puericultura: Cuidados integrales del niño sano. Elsevier.", sortKey: "Coronado" },
+            { unit: "Unidad 02", author: "Peralta Espinosa, M. V.", year: 2022, text: "Peralta Espinosa, M. V. (2022). Educación inicial de calidad: Puericultura, pedagogía y derechos de la infancia. Ediciones JUNJI.", sortKey: "Peralta" },
+            { unit: "Unidad 02", author: "MIES", year: 2021, text: "Ministerio de Inclusión Económica y Social [MIES]. (2021). Informe de gestión de los servicios de desarrollo infantil integral. MIES.", sortKey: "Mies" },
+
+            // UNIDAD 3
+            { unit: "Unidad 03", author: "Ainscow, M., y Booth, T.", year: 2021, text: "Ainscow, M., y Booth, T. (2021). Guía para la educación inclusiva: Desarrollando el aprendizaje y la participación en los centros escolares (3.ª ed.). OEI-FUHEM.", sortKey: "Ainscow" },
+            { unit: "Unidad 03", author: "Arnáiz Sánchez, P.", year: 2021, text: "Arnáiz Sánchez, P. (2021). Educación inclusiva: Una escuela para todos. Aljibe.", sortKey: "Arnaiz" },
+            { unit: "Unidad 03", author: "Constitución del Ecuador", year: 2008, text: "Constitución de la República del Ecuador. (2008). Asamblea Nacional Constituyente.", sortKey: "Constitucion" },
+            { unit: "Unidad 03", author: "Ministerio de Educación", year: 2023, text: "Ministerio de Educación del Ecuador. (2023). Modelo de educación inclusiva. Ministerio de Educación.", sortKey: "Ministerio" },
+            { unit: "Unidad 03", author: "UNESCO", year: 2020, text: "UNESCO. (2020). Educación inclusiva: De la retórica a la práctica. UNESCO.", sortKey: "Unesco" },
+
+            // UNIDAD 4
+            { unit: "Unidad 04", author: "Bralic, S., y Mercer, R.", year: 2021, text: "Bralic, S., y Mercer, R. (2021). Educación inicial y pedagogía crítica en América Latina: Enfoques y desafíos. FLACSO.", sortKey: "Bralic" },
+            { unit: "Unidad 04", author: "Peralta & Fujimoto", year: 2020, text: "Peralta Espinosa, M. V., y Fujimoto Gómez, G. (2020). La atención integral de la primera infancia en América Latina (2.ª ed.). OEA.", sortKey: "Peralta" },
+            { unit: "Unidad 04", author: "Zabalza Beraza, M. Á.", year: 2021, text: "Zabalza Beraza, M. Á. (2021). Didáctica de la Educación Infantil (5.ª ed.). Narcea.", sortKey: "Zabalza" },
+
+            // UNIDAD 5
+            { unit: "Unidad 05", author: "Aguilera Albesa, S.", year: 2020, text: "Aguilera Albesa, S., y Botella Astillero, A. (2020). Trastornos del lenguaje y la comunicación en la infancia. Pediátrica.", sortKey: "Aguilera" },
+            { unit: "Unidad 05", author: "Kozulin, A. (Vygotski)", year: 2020, text: "Kozulin, A. (Comp.). (2020). Pensamiento y lenguaje: Obras escogidas de Vygotski. Paidós. (Original 1934).", sortKey: "Kozulin" },
+            { unit: "Unidad 05", author: "Owens, R. E.", year: 2021, text: "Owens, R. E. (2021). Desarrollo del lenguaje (8.ª ed.). Pearson Educación.", sortKey: "Owens" },
+            { unit: "Unidad 05", author: "Papalia, D. E., y Martorell, G.", year: 2021, text: "Papalia, D. E., y Martorell, G. (2021). Desarrollo humano (13.ª ed.). McGraw-Hill.", sortKey: "Papalia" }
+        ];
+
+        function changeFilter(type) {
+            // Actualizar botones
+            document.getElementById('btn-unidad').classList.toggle('active', type === 'unidad');
+            document.getElementById('btn-alfabetico').classList.toggle('active', type === 'alfabetico');
+            
+            render(type);
+        }
+
+        function render(type) {
+            const container = document.getElementById('refs-container');
+            container.innerHTML = '';
+
+            if (type === 'unidad') {
+                const units = [...new Set(bibliografia.map(item => item.unit))];
+                units.forEach(u => {
+                    const section = document.createElement('div');
+                    section.innerHTML = `
+                        <div class="flex items-center gap-4 mb-6">
+                            <h2 class="text-2xl font-black font-serif text-[#005c30]">${u}</h2>
+                            <div class="flex-grow h-px bg-slate-200"></div>
+                        </div>
+                        <div class="grid gap-4">
+                            ${bibliografia.filter(item => item.unit === u).map(item => `
+                                <div class="ref-card">
+                                    <p class="text-gray-500 text-xs leading-relaxed italic">${item.text}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    container.appendChild(section);
+                });
+            } else {
+                const sorted = [...bibliografia].sort((a, b) => a.sortKey.localeCompare(b.sortKey));
+                const grid = document.createElement('div');
+                grid.className = "grid gap-4";
+                grid.innerHTML = sorted.map(item => `
+                    <div class="ref-card">
+                        <span class="unit-badge">${item.unit}</span>
+                        <p class="text-gray-500 text-xs leading-relaxed italic">${item.text}</p>
+                    </div>
+                `).join('');
+                container.appendChild(grid);
+            }
+            lucide.createIcons();
+        }
+
+        // Iniciar
+        window.addEventListener('load', () => {
+            render('unidad');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puericultura - Diana Alomoto</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/jZqMKjSS/dianalomoto.png">
+    
+    <!-- Tailwind & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- CSS Personalizado Global -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        body {
+            background-color: #f8fafc; 
+            color: #1e293b;
+        }
+
+        .section-container {
+            background: white;
+            border-radius: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .materia-title {
+            color: #005c30;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .accent-bar {
+            width: 60px;
+            height: 4px;
+            background-color: #ffc600;
+            border-radius: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .image-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            height: auto;
+            background: #eee;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .upec-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .upec-list-bullet {
+            color: #ffc600;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .btn-outline-upec {
+            border: 2px solid #005c30;
+            color: #005c30;
+            background: transparent;
+            padding: 0.9rem 1.8rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-upec:hover {
+            background: #005c30;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .video-container {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            background: black;
+            aspect-ratio: 16/9;
+        }
+
+        /* Badge de área de intervención */
+        .area-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .area-card:hover {
+            background: white;
+            border-color: #ffc600;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor del Navbar -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Header con identidad UPEC -->
+    <header class="pt-32 pb-16 bg-[#005c30] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="animate-fade-up">
+                <span class="inline-flex items-center gap-2 text-[#ffc600] text-[10px] font-black uppercase tracking-[0.3em] bg-white/10 px-4 py-2 rounded-full mb-6">
+                    <i data-lucide="heart" class="w-3.5 h-3.5"></i> Unidad de Aprendizaje 02
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight font-serif mb-4">
+                    Ciencia de la<br>
+                    <span class="text-[#ffc600] italic">Puericultura Infantil</span>
+                </h1>
+                <p class="text-white/70 text-sm md:text-base max-w-2xl font-medium">
+                    Cuidado integral y desarrollo biopsicosocial del niño desde la concepción hasta los primeros años de vida.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-16">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            
+            <!-- SECCIÓN 01: DEFINICIÓN -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-up">
+                    <div class="accent-bar"></div>
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">01.</span> Definición
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base space-y-4 text-justify">
+                        <p>
+                            La puericultura es la rama de las ciencias de la salud y la educación que se ocupa del cuidado integral del niño desde su concepción hasta la adolescencia temprana, abarcando aspectos físicos, nutricionales, emocionales y sociales. De acuerdo con <span class="font-bold text-[#005c30]">Álvarez Gómez y Muñoz Cano (2020)</span>, comprende el conjunto de conocimientos y técnicas destinadas a promover el crecimiento y desarrollo óptimo del niño.
+                        </p>
+                        <p>
+                            Esta disciplina ha evolucionado hacia una perspectiva interdisciplinaria que involucra a docentes, familias y comunidades. En el contexto educativo, la puericultura orienta las prácticas de cuidado en los centros de Educación Inicial, guiando al profesional en la atención a la salud y prevención de enfermedades.
+                        </p>
+                    </div>
+                </div>
+                <div class="animate-fade-up" style="animation-delay: 0.2s;">
+                    <div class="image-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjk1v7OufdjThunHh-1m043wkaxRClLy2TlIIcoP49MPOyakNx6d2DcOEV1nIjbVW2MNs5U3GLwtrun-DEHn1M-D4j8NJ1cBiCLPT0ry0ZNelXwQ51jzzmozmGibool4c7E5rAPONtks5hs77y6P-1QQrdDfkF1MQxCH1YBUH55Qxao0FGukgpZU7y-7_4H/w800/puericultura.jpg" alt="[Imagen de puericultura infantil]">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 02: ÁREAS DE INTERVENCIÓN -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                    <span class="text-[#ffc600]">02.</span> Áreas de Intervención
+                </h2>
+                <p class="text-gray-600 mb-10 text-sm md:text-base text-justify">
+                    Según <span class="font-bold">Coronado Velasco (2021)</span>, la puericultura se desarrolla en diversas áreas fundamentales para garantizar la salud integral del infante:
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="area-card flex items-start gap-4">
+                        <div class="w-12 h-12 bg-[#005c30]/10 text-[#005c30] rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="apple" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#005c30] text-sm mb-1">Nutrición</h4>
+                            <p class="text-gray-500 text-xs">Pautas para una dieta equilibrada y lactancia materna.</p>
+                        </div>
+                    </div>
+                    <div class="area-card flex items-start gap-4">
+                        <div class="w-12 h-12 bg-[#005c30]/10 text-[#005c30] rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="droplets" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#005c30] text-sm mb-1">Higiene</h4>
+                            <p class="text-gray-500 text-xs">Limpieza, baño y cuidado de la piel del infante.</p>
+                        </div>
+                    </div>
+                    <div class="area-card flex items-start gap-4">
+                        <div class="w-12 h-12 bg-[#005c30]/10 text-[#005c30] rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="moon" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#005c30] text-sm mb-1">Descanso</h4>
+                            <p class="text-gray-500 text-xs">Orientaciones sobre ritmos de sueño saludables.</p>
+                        </div>
+                    </div>
+                    <div class="area-card flex items-start gap-4">
+                        <div class="w-12 h-12 bg-[#005c30]/10 text-[#005c30] rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="brain" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#005c30] text-sm mb-1">Estimulación</h4>
+                            <p class="text-gray-500 text-xs">Desarrollo cognitivo, motor y socioafectivo.</p>
+                        </div>
+                    </div>
+                    <div class="area-card flex items-start gap-4">
+                        <div class="w-12 h-12 bg-[#005c30]/10 text-[#005c30] rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="shield-check" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-[#005c30] text-sm mb-1">Prevención</h4>
+                            <p class="text-gray-500 text-xs">Control de vacunas y detección temprana de señales.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 03: ROL DEL EDUCADOR -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="order-2 lg:order-1 animate-fade-up">
+                    <div class="image-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWuu4oEQecnexM52zhe8p5KEdcgfIDUnBfwc6sdSyuC-qutP4Uqbp9UAHkkRuuS-yen8nKUgv__zxVbxsatgwwILAYFjUe9sJ1AJrOzA2DJeCVw_oVHXc6nUQgrCGELHdzGhGCVn_mk9EkDYsH8PUDSvNA0Lpsas34kaXmurt1hVghTD_NvTVkamQ_Hmn0/w800/educacion-inicial-2.webp" alt="[Imagen del educador infantil]">
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2 animate-fade-up">
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">03.</span> El Rol del Educador
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base space-y-4 text-justify">
+                        <p>
+                            El docente de Educación Inicial desempeña un papel protagónico en la aplicación de principios de puericultura dentro del aula. Más allá del rol pedagógico, actúa como un observador atento del desarrollo infantil.
+                        </p>
+                        <p>
+                            <span class="font-bold text-[#005c30]">Peralta Espinosa (2022)</span> afirma que la formación en puericultura permite al docente construir ambientes de aprendizaje seguros, higiénicos y emocionalmente nutritivos, facilitando la detección de señales de alerta.
+                        </p>
+                        <ul class="upec-list ml-2">
+                            <li><span class="upec-list-bullet">✓</span> <p>Promotor de hábitos saludables en el aula.</p></li>
+                            <li><span class="upec-list-bullet">✓</span> <p>Nexo fundamental entre la familia y el sistema de salud.</p></li>
+                            <li><span class="upec-list-bullet">✓</span> <p>Guía en el desarrollo psicomotor y socioafectivo.</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 04: ECUADOR -->
+            <section class="bg-[#fffbeb] p-8 md:p-14 rounded-[48px] border-l-8 border-[#ffc600] animate-fade-up">
+                <div class="max-w-4xl">
+                    <h3 class="text-2xl font-black text-[#005c30] uppercase tracking-widest mb-6 flex items-center gap-3">
+                        <i data-lucide="map" class="text-[#ffc600] w-6 h-6"></i> Importancia en Ecuador
+                    </h3>
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify italic">
+                        "En el Ecuador, la puericultura está vinculada con las políticas del Ministerio de Salud y el MIES a través de programas como Creciendo con Nuestros Hijos (CNH), garantizando el desarrollo pleno de los niños en situación de vulnerabilidad." — <span class="font-bold text-[#005c30]">MIES (2021)</span>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 05: MATERIAL AUDIOVISUAL -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black materia-title mb-4">Material de Apoyo Audiovisual</h2>
+                    <div class="w-20 h-1.5 bg-[#ffc600] mx-auto rounded-full"></div>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="video-container group">
+                        <iframe src="https://www.youtube.com/embed/iDVF8R3fGZs" class="w-full h-full opacity-90 group-hover:opacity-100 transition-opacity" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <p class="mt-6 text-center text-gray-400 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 italic">
+                        <i data-lucide="youtube" class="text-red-600"></i> Video: Licenciatura en Puericultura y Educación Infantil
+                    </p>
+                </div>
+            </section>
+
+            <!-- BIBLIOGRAFÍA -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h4 class="text-[#005c30] font-black text-xs uppercase tracking-[0.3em] mb-8 flex items-center gap-3">
+                    <i data-lucide="book-open" class="text-[#ffc600]"></i> Bibliografía de la Unidad
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6 text-[11px] md:text-xs text-gray-500 leading-relaxed">
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Álvarez Gómez, M., y Muñoz Cano, J. M. (2020). <em>Puericultura: Fundamentos y aplicaciones en la atención infantil</em> (2.ª ed.). Manual Moderno.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Coronado Velasco, C. (2021). <em>Enfermería pediátrica y puericultura: Cuidados integrales del niño sano.</em> Elsevier.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Peralta Espinosa, M. V. (2022). <em>Educación inicial de calidad: Puericultura, pedagogía y derechos de la infancia.</em> Ediciones JUNJI.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Ministerio de Inclusión Económica y Social [MIES]. (2021). <em>Informe de gestión de los servicios de desarrollo infantil integral.</em> MIES.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NAVEGACIÓN INFERIOR -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-center gap-6">
+                <a href="recursos" class="btn-outline-upec justify-center">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver a Recursos
+                </a>
+                <a href="inclusion" class="btn-primary px-10 py-4 rounded-full justify-center">
+                    Siguiente: Inclusión <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Contenedor del Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts Globales -->
+    <script src="main.js"></script>
+</body>
+</html>

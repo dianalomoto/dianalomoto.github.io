@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Académico - Diana Alomoto - UPEC</title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/tMsj3DRS/A.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --upec-green: #005c30;
+            --upec-green-light: #007a40;
+            --upec-yellow: #ffc600;
+            --upec-dark: #0a0a0a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            scroll-behavior: smooth;
+            background: #f0f4f0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        .bg-upec-green { background-color: var(--upec-green); }
+        .text-upec-green { color: var(--upec-green); }
+        .bg-upec-yellow { background-color: var(--upec-yellow); }
+        .border-upec-yellow { border-color: var(--upec-yellow); }
+
+        /* ========== NAVBAR ========== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #004a26 0%, #005c30 50%, #006b38 100%);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+            border-bottom: 3px solid var(--upec-yellow);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn {
+            position: relative;
+            padding: 8px 14px;
+            color: rgba(255,255,255,0.85);
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+        }
+
+        .nav-btn:hover {
+            color: var(--upec-yellow);
+            background: rgba(255,198,0,0.1);
+            transform: translateY(-1px);
+        }
+
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 80%;
+            height: 2px;
+            background: var(--upec-yellow);
+            transition: transform 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-link-active {
+            color: var(--upec-yellow) !important;
+            background: rgba(255,198,0,0.15) !important;
+        }
+
+        .nav-link-active::after {
+            transform: translateX(-50%) scaleX(1) !important;
+        }
+
+        /* ========== PAGE TRANSITIONS ========== */
+        .page-transition { display: none; }
+        .page-active {
+            display: block;
+            animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255,198,0,0.4); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(255,198,0,0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255,198,0,0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes textReveal {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes badgeFloat {
+            from { opacity: 0; transform: translateY(20px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* ========== HERO SECTION ========== */
+        #inicio {
+            min-height: 100vh;
+            background:
+                linear-gradient(160deg, rgba(0,30,15,0.97) 0%, rgba(0,70,35,0.92) 40%, rgba(0,40,20,0.97) 100%),
+                url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1600&q=80') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #inicio::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 60% 80% at 80% 50%, rgba(255,198,0,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,92,48,0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Animated geometric shapes */
+        .hero-shape {
+            position: absolute;
+            border: 1px solid rgba(255,198,0,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-shape-1 {
+            width: 300px; height: 300px;
+            right: 5%; top: 10%;
+            animation-delay: 0s;
+        }
+
+        .hero-shape-2 {
+            width: 150px; height: 150px;
+            right: 15%; top: 25%;
+            border-color: rgba(255,198,0,0.2);
+            animation-delay: 1s;
+        }
+
+        .hero-shape-3 {
+            width: 80px; height: 80px;
+            right: 8%; top: 45%;
+            border-color: rgba(255,198,0,0.15);
+            animation-delay: 2s;
+        }
+
+        /* ========== SECTION CARDS ========== */
+        .section-card {
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 20px 50px rgba(0,92,48,0.08);
+            overflow: hidden;
+            border: 1px solid rgba(0,92,48,0.06);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #004a26 0%, #005c30 60%, #007a40 100%);
+            padding: 48px 56px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            width: 200px;
+            height: 200px;
+            border: 40px solid rgba(255,198,0,0.08);
+            border-radius: 50%;
+        }
+
+        /* ========== CONTENT BLOCKS ========== */
+        .content-block {
+            background: linear-gradient(135deg, #f0f9f4 0%, #e8f5ec 100%);
+            border-left: 5px solid var(--upec-green);
+            border-radius: 16px;
+            padding: 28px 32px;
+            position: relative;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid rgba(0,92,48,0.08);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,92,48,0.12);
+            border-color: rgba(0,92,48,0.2);
+        }
+
+        /* ========== SUBJECT CARDS on INICIO ========== */
+        .subject-card {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(8px);
+        }
+
+        .subject-card:hover {
+            background: rgba(255,198,0,0.15);
+            border-color: rgba(255,198,0,0.4);
+            transform: translateX(6px);
+        }
+
+        /* ========== STAT COUNTERS ========== */
+        .stat-pill {
+            background: rgba(255,198,0,0.1);
+            border: 1px solid rgba(255,198,0,0.3);
+            border-radius: 100px;
+            padding: 8px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--upec-yellow);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ========== VIDEO WRAPPER ========== */
+        .video-frame {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            position: relative;
+        }
+
+        .video-frame::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, var(--upec-yellow), transparent, var(--upec-green));
+            z-index: -1;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: linear-gradient(160deg, #080808 0%, #0f1f13 50%, #080808 100%);
+            border-top: 4px solid var(--upec-yellow);
+            color: white;
+            padding: 80px 0 40px;
+        }
+
+        .footer-logo-text {
+            background: linear-gradient(135deg, var(--upec-yellow), #fff5b0, var(--upec-yellow));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .social-btn {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-btn:hover {
+            background: var(--upec-yellow);
+            color: var(--upec-green);
+            border-color: var(--upec-yellow);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255,198,0,0.3);
+        }
+
+        /* ========== PRESENTATION BLOCK ========== */
+        .presentation-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,198,0,0.04) 100%);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .topic-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .topic-link:hover {
+            color: var(--upec-yellow);
+            padding-left: 8px;
+        }
+
+        .topic-link:last-child { border-bottom: none; }
+
+        /* ========== REFERENCE ITEMS ========== */
+        .ref-item {
+            padding: 16px 20px;
+            border-left: 3px solid rgba(255,255,255,0.15);
+            margin-bottom: 12px;
+            font-size: 12px;
+            line-height: 1.7;
+            opacity: 0.8;
+            font-style: italic;
+            transition: all 0.3s ease;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .ref-item:hover {
+            border-left-color: var(--upec-yellow);
+            opacity: 1;
+            background: rgba(255,255,255,0.04);
+        }
+
+        /* ========== MOBILE MENU ========== */
+        #mobile-menu {
+            background: linear-gradient(160deg, #004a26, #005c30);
+            border-top: 1px solid rgba(255,198,0,0.2);
+        }
+
+        /* ========== SCROLL INDICATOR ========== */
+        .scroll-dot {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.5);
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: fadeIn 2s 1s both;
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid rgba(255,198,0,0.5);
+            border-bottom: 2px solid rgba(255,198,0,0.5);
+            transform: rotate(45deg);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* ========== ANIMATE ON LOAD ========== */
+        .anim-1 { animation: textReveal 0.7s 0.1s both; }
+        .anim-2 { animation: textReveal 0.7s 0.3s both; }
+        .anim-3 { animation: textReveal 0.7s 0.5s both; }
+        .anim-4 { animation: badgeFloat 0.6s 0.7s both; }
+        .anim-5 { animation: badgeFloat 0.6s 0.9s both; }
+
+        /* ========== MATERIA BADGE ========== */
+        .materia-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,198,0,0.2);
+            border: 1px solid rgba(255,198,0,0.4);
+            color: var(--upec-yellow);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 16px;
+        }
+
+        /* ========== HIGHLIGHT QUOTE ========== */
+        .highlight-quote {
+            border-left: 6px solid var(--upec-yellow);
+            background: linear-gradient(135deg, #fffbec, #fff9dc);
+            padding: 24px 28px;
+            border-radius: 0 16px 16px 0;
+            font-style: italic;
+            color: #3a3a3a;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <header>
+        <nav>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20 items-center">
+                    <!-- Logo -->
+                    <div class="flex items-center gap-4 cursor-pointer group" onclick="showPage('inicio')">
+                        <div style="animation: pulse-ring 2.5s infinite; border-radius: 50%; padding: 2px;">
+                            <img src="https://i.ibb.co/tMsj3DRS/A.png" alt="Logo Diana" class="h-10 w-auto group-hover:scale-110 transition-transform" style="border-radius:50%; background:rgba(255,198,0,0.1);">
+                        </div>
+                        <div class="text-white border-l border-white/20 pl-4 hidden sm:block leading-none">
+                            <span class="block font-black text-xl tracking-tighter uppercase" style="font-family:'Playfair Display',serif;">DIANA ALOMOTO</span>
+                            <span class="block font-bold text-[9px] uppercase tracking-widest mt-1" style="color: var(--upec-yellow);">📚 Blog Académico · UPEC</span>
+                        </div>
+                    </div>
+
+                    <!-- Desktop Nav -->
+                    <div class="hidden lg:flex items-center gap-1">
+                        <button onclick="showPage('inicio')" data-page="inicio" class="nav-btn">
+                            <i data-lucide="home" class="w-4 h-4"></i> Inicio
+                        </button>
+                        <button onclick="showPage('recursos')" data-page="recursos" class="nav-btn">
+                            <i data-lucide="monitor" class="w-4 h-4"></i> Recursos
+                        </button>
+                        <button onclick="showPage('puericultura')" data-page="puericultura" class="nav-btn">
+                            <i data-lucide="heart" class="w-4 h-4"></i> Puericultura
+                        </button>
+                        <button onclick="showPage('inclusion')" data-page="inclusion" class="nav-btn">
+                            <i data-lucide="users" class="w-4 h-4"></i> Inclusión
+                        </button>
+                        <button onclick="showPage('curriculo')" data-page="curriculo" class="nav-btn">
+                            <i data-lucide="book-open" class="w-4 h-4"></i> Currículo
+                        </button>
+                        <button onclick="showPage('lenguaje')" data-page="lenguaje" class="nav-btn">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i> Lenguaje
+                        </button>
+                        <button onclick="showPage('referencias')" data-page="referencias" class="nav-btn">
+                            <i data-lucide="book-marked" class="w-4 h-4"></i> Refs.
+                        </button>
+                        <div class="ml-3 pl-3 border-l border-white/10">
+                            <span class="stat-pill">
+                                <i data-lucide="graduation-cap" class="w-3 h-3"></i> 3er Semestre
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Toggle -->
+                    <button class="lg:hidden p-2 text-white rounded-lg hover:bg-white/10 transition-all" onclick="toggleMobileMenu()">
+                        <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden lg:hidden p-4 space-y-1">
+                <button onclick="showPage('inicio')" class="w-full text-left p-3 text-white font-bold uppercase text-xs hover:bg-black/20 rounded-xl flex items-center gap-3 transition-all"><i data-lucide="home" class="w-4 h-4" style="color:var(--upec-yellow)"></i> Inicio</button>
+                <button onclick="showPage('recursos')" class="w-full text-left p-3 text-white font-bold uppercase text-xs hover:bg-black/20 rounded-xl flex items-center gap-3 transition-all"><i data-lucide="monitor" class="w-4 h-4" style="color:var(--upec-yellow)"></i> Recursos Digitales</button>
+                <button onclick="showPage('puericultura')" class="w-full text-left p-3 text-white font-bold uppercase text-xs hover:bg-black/20 rounded-xl flex items-center gap-3 transition-all"><i data-lucide="heart" class="w-4 h-4" style="color:var(--upec-yellow)"></i> Puericultura</button>
+                <button onclick="showPage('inclusion')" class="w-full text-left p-3 text-white font-bold uppercase text-xs hover:bg-black/20 rounded-xl flex items-center gap-3 transition-all"><i data-lucide="users" class="w-4 h-4" style="color:var(--upec-yellow)"></i> Inclusión Educativa</button>
+                <button onclick="showPage('curriculo')" class="w-full text-left p-3 text-white font-bold uppercase text-xs hover:bg-black/20 rounded-xl flex items-center gap-3 transition-all"><i data-lucide="book-open" class="w-4 h-4" style="color:var(--upec-yellow)"></i> Abordaje Curricular</button>
+                <button onclick="showPage('lenguaje')" class="w-full text-left p-3 text-white font-bold uppercase text-xs hover:bg-black/20 rounded-xl flex items-center gap-3 transition-all"><i data-lucide="message-circle" class="w-4 h-4" style="color:var(--upec-yellow)"></i> Pensamiento y Lenguaje</button>
+                <button onclick="showPage('referencias')" class="w-full text-left p-3 text-white font-bold uppercase text-xs hover:bg-black/20 rounded-xl flex items-center gap-3 transition-all"><i data-lucide="book-marked" class="w-4 h-4" style="color:var(--upec-yellow)"></i> Referencias</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="mt-20">
+
+        <!-- ===== PÁGINA: INICIO ===== -->
+        <section id="inicio" class="page-transition page-active">
+            <div class="hero-shape hero-shape-1"></div>
+            <div class="hero-shape hero-shape-2"></div>
+            <div class="hero-shape hero-shape-3"></div>
+
+            <div class="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-0" style="min-height: 100vh; display: flex; align-items: center;">
+                <div class="grid lg:grid-cols-2 gap-16 items-center w-full">
+
+                    <!-- Left: Main info -->
+                    <div class="text-white">
+                        <div class="anim-1">
+                            <span class="stat-pill mb-6 inline-flex">
+                                <i data-lucide="map-pin" class="w-3 h-3"></i> UPEC · Tulcán, Ecuador
+                            </span>
+                        </div>
+
+                        <h1 class="anim-2 font-black mb-4 leading-none" style="font-family:'Playfair Display',serif; font-size: clamp(3rem, 8vw, 6rem);">
+                            DIANA<br><span style="color: var(--upec-yellow); font-style: italic;">ALOMOTO</span>
+                        </h1>
+
+                        <p class="anim-3 text-lg md:text-xl font-light mb-8" style="color: rgba(255,255,255,0.7); max-width: 500px; line-height: 1.7;">
+                            Blog Académico · Educación Inicial · Tercer Semestre
+                        </p>
+
+                        <!-- Presentation block -->
+                        <div class="anim-4 presentation-section mb-8">
+                            <div class="flex items-center gap-3 mb-5">
+                                <span style="font-size: 1.4rem;">📘</span>
+                                <h3 class="text-white font-black text-lg uppercase tracking-wide" style="font-family:'Playfair Display',serif;">Presentación del Blog</h3>
+                            </div>
+                            <p style="color: rgba(255,255,255,0.75); font-size: 14px; line-height: 1.8; margin-bottom: 20px;">
+                                Este blog académico recopila y presenta información relevante de las asignaturas cursadas en el tercer semestre de la carrera de <strong style="color:var(--upec-yellow)">Educación Inicial</strong> en la Universidad Politécnica Estatal del Carchi.
+                            </p>
+
+                            <p style="color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">
+                                <i data-lucide="layers" class="w-3 h-3 inline-block mr-1" style="color:var(--upec-yellow)"></i> Temas abordados:
+                            </p>
+
+                            <div class="space-y-1">
+                                <div class="topic-link" onclick="showPage('recursos')">
+                                    <i data-lucide="monitor" class="w-4 h-4 flex-shrink-0" style="color:var(--upec-yellow)"></i>
+                                    Diseño de recursos digitales de aprendizaje
+                                    <i data-lucide="chevron-right" class="w-3 h-3 ml-auto opacity-50"></i>
+                                </div>
+                                <div class="topic-link" onclick="showPage('inclusion')">
+                                    <i data-lucide="users" class="w-4 h-4 flex-shrink-0" style="color:var(--upec-yellow)"></i>
+                                    Inclusión educativa en el nivel inicial
+                                    <i data-lucide="chevron-right" class="w-3 h-3 ml-auto opacity-50"></i>
+                                </div>
+                                <div class="topic-link" onclick="showPage('puericultura')">
+                                    <i data-lucide="heart" class="w-4 h-4 flex-shrink-0" style="color:var(--upec-yellow)"></i>
+                                    Puericultura
+                                    <i data-lucide="chevron-right" class="w-3 h-3 ml-auto opacity-50"></i>
+                                </div>
+                                <div class="topic-link" onclick="showPage('curriculo')">
+                                    <i data-lucide="book-open" class="w-4 h-4 flex-shrink-0" style="color:var(--upec-yellow)"></i>
+                                    Abordaje pedagógico curricular
+                                    <i data-lucide="chevron-right" class="w-3 h-3 ml-auto opacity-50"></i>
+                                </div>
+                                <div class="topic-link" onclick="showPage('lenguaje')">
+                                    <i data-lucide="message-circle" class="w-4 h-4 flex-shrink-0" style="color:var(--upec-yellow)"></i>
+                                    Desarrollo del pensamiento y lenguaje
+                                    <i data-lucide="chevron-right" class="w-3 h-3 ml-auto opacity-50"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="anim-5 flex flex-wrap gap-4">
+                            <button onclick="showPage('recursos')" class="flex items-center gap-3 font-black uppercase tracking-tight px-8 py-4 rounded-full text-sm transition-all hover:scale-105 hover:shadow-2xl" style="background: var(--upec-yellow); color: var(--upec-green); box-shadow: 0 8px 25px rgba(255,198,0,0.3);">
+                                <i data-lucide="play" class="w-4 h-4 fill-current"></i> Comenzar Lectura
+                            </button>
+                            <button onclick="showPage('referencias')" class="flex items-center gap-3 font-bold uppercase tracking-tight px-8 py-4 rounded-full text-sm transition-all hover:bg-white/10" style="background: rgba(255,255,255,0.08); color: white; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px);">
+                                <i data-lucide="book-marked" class="w-4 h-4"></i> Bibliografía
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right: Student card -->
+                    <div class="anim-4 hidden lg:block">
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 28px; padding: 40px; backdrop-filter: blur(15px);">
+
+                            <div style="background: linear-gradient(135deg, var(--upec-green), #007a40); border-radius: 20px; padding: 32px; margin-bottom: 28px; text-align: center; position: relative; overflow: hidden;">
+                                <div style="position:absolute; inset:0; background: radial-gradient(ellipse at 80% 20%, rgba(255,198,0,0.15), transparent 60%);"></div>
+                                <img src="https://i.ibb.co/tMsj3DRS/A.png" alt="Logo" style="height: 80px; margin: 0 auto 20px; display: block; filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));">
+                                <p class="font-black text-2xl text-white mb-1" style="font-family:'Playfair Display',serif;">Diana Alomoto</p>
+                                <p style="color: rgba(255,255,255,0.6); font-size: 12px; text-transform: uppercase; letter-spacing: 0.15em;">Educación Inicial</p>
+                            </div>
+
+                            <!-- 🎯 OBJETIVO DEL BLOG -->
+                            <div style="margin-bottom: 24px; padding: 24px; background: rgba(255,198,0,0.08); border: 1px solid rgba(255,198,0,0.2); border-radius: 16px;">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span style="font-size: 1.1rem;">🎯</span>
+                                    <p class="font-black text-white uppercase text-xs tracking-widest">Objetivo del Blog</p>
+                                </div>
+                                <p style="color: rgba(255,255,255,0.7); font-size: 13px; line-height: 1.7;">
+                                    Fortalecer los conocimientos adquiridos mediante la investigación, organización y presentación de contenidos educativos con base en criterios académicos.
+                                </p>
+                            </div>
+
+                            <!-- 👩‍🎓 DATOS ESTUDIANTE -->
+                            <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px;">
+                                <p class="font-black text-white text-xs uppercase tracking-widest mb-3 flex items-center gap-2">
+                                    <span>👩‍🎓</span> Datos de la Estudiante
+                                </p>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-3">
+                                        <i data-lucide="user" class="w-4 h-4 flex-shrink-0" style="color:var(--upec-yellow)"></i>
+                                        <div>
+                                            <p style="color:rgba(255,255,255,0.5); font-size:10px; text-transform:uppercase; letter-spacing:0.1em;">Nombre</p>
+                                            <p style="color:white; font-weight:700; font-size:14px;">Diana Lisbeth Alomoto Sandoval</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <i data-lucide="graduation-cap" class="w-4 h-4 flex-shrink-0" style="color:var(--upec-yellow)"></i>
+                                        <div>
+                                            <p style="color:rgba(255,255,255,0.5); font-size:10px; text-transform:uppercase; letter-spacing:0.1em;">Carrera · Semestre</p>
+                                            <p style="color:white; font-weight:700; font-size:14px;">Educación Inicial · Tercero 03 A-M</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <i data-lucide="building-2" class="w-4 h-4 flex-shrink-0" style="color:var(--upec-yellow)"></i>
+                                        <div>
+                                            <p style="color:rgba(255,255,255,0.5); font-size:10px; text-transform:uppercase; letter-spacing:0.1em;">Universidad</p>
+                                            <p style="color:white; font-weight:700; font-size:14px;">UPEC · Tulcán, Ecuador</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="scroll-dot" onclick="showPage('recursos')" style="cursor:pointer;">
+                <div class="scroll-arrow"></div>
+                <span>Explorar</span>
+            </div>
+        </section>
+
+        <!-- ===== VENTANAS DE MATERIAS ===== -->
+        <div class="max-w-6xl mx-auto px-4 py-16 min-h-screen">
+
+            <!-- ===== RECURSOS DIGITALES ===== -->
+            <div id="recursos" class="page-transition">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="materia-badge">
+                            <i data-lucide="monitor" class="w-3 h-3"></i> Unidad de Aprendizaje 01
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black leading-none mb-3" style="font-family:'Playfair Display',serif;">Diseño de Recursos<br>Digitales de Aprendizaje</h2>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">Recursos interactivos para la educación inicial</p>
+                    </div>
+                    <div class="p-10 md:p-14 space-y-10">
+
+                        <!-- Definición -->
+                        <div class="grid lg:grid-cols-2 gap-12">
+                            <div class="space-y-6">
+                                <h3 class="font-black text-2xl flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                    <span class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-black text-white" style="background:var(--upec-green);">📖</span> Definición
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    El diseño de recursos digitales de aprendizaje se entiende como el proceso planificado e intencional de crear, organizar y estructurar materiales educativos en formatos digitales, con el propósito de facilitar la adquisición de conocimientos, habilidades y actitudes. Según <strong>Morales y Torres (2021)</strong>, implica la integración de principios pedagógicos con herramientas tecnológicas para generar experiencias de aprendizaje significativas, accesibles y adaptadas a las necesidades del aprendiz.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    En el contexto de la educación inicial, estos recursos permiten al docente complementar las estrategias presenciales con materiales atractivos que estimulan la motivación y el aprendizaje activo. <strong>Cabero Almenara (2020)</strong> señala que los recursos digitales educativos se caracterizan por ser interactivos, reutilizables y capaces de adaptarse a distintos ritmos y estilos de aprendizaje.
+                                </p>
+                            </div>
+                            <div>
+                                <div class="video-frame">
+                                    <div style="aspect-ratio: 16/9; background: black;">
+                                        <iframe src="https://www.youtube.com/embed/Ae5n33PC2kk" class="w-full h-full" allowfullscreen style="border:none;"></iframe>
+                                    </div>
+                                </div>
+                                <p class="mt-4 text-center text-gray-400 text-sm flex items-center justify-center gap-2 italic">
+                                    <i data-lucide="youtube" class="w-4 h-4"></i> 12 herramientas educativas digitales para mejorar el aprendizaje
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Características -->
+                        <div>
+                            <h3 class="font-black text-2xl mb-6 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="list-checks" class="w-6 h-6" style="color:var(--upec-yellow)"></i> Características Principales
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                Los recursos digitales de aprendizaje presentan características que los distinguen de los materiales tradicionales. <strong>Prendes Espinosa (2022)</strong> destaca que estos recursos favorecen la retroalimentación inmediata, elemento clave para la autorregulación del aprendizaje.
+                            </p>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="info-card text-center">
+                                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background: linear-gradient(135deg, #e8f5ec, #d0edd8);">
+                                        <i data-lucide="zap" class="w-6 h-6" style="color:var(--upec-green)"></i>
+                                    </div>
+                                    <p class="font-black text-sm mb-1" style="color:var(--upec-green)">Interactividad</p>
+                                    <p class="text-gray-500 text-xs">Participación activa del estudiante en tiempo real</p>
+                                </div>
+                                <div class="info-card text-center" style="border-top: 3px solid var(--upec-yellow);">
+                                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background: linear-gradient(135deg, #fffbec, #fff5cc);">
+                                        <i data-lucide="layers" class="w-6 h-6" style="color:#c9a000"></i>
+                                    </div>
+                                    <p class="font-black text-sm mb-1" style="color:#c9a000">Multimedialidad</p>
+                                    <p class="text-gray-500 text-xs">Combina texto, imagen, audio y video dinámicamente</p>
+                                </div>
+                                <div class="info-card text-center">
+                                    <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background: linear-gradient(135deg, #e8f5ec, #d0edd8);">
+                                        <i data-lucide="globe" class="w-6 h-6" style="color:var(--upec-green)"></i>
+                                    </div>
+                                    <p class="font-black text-sm mb-1" style="color:var(--upec-green)">Accesibilidad</p>
+                                    <p class="text-gray-500 text-xs">Acceso desde cualquier dispositivo y momento</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tipos -->
+                        <div>
+                            <h3 class="font-black text-2xl mb-6 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="grid" class="w-6 h-6" style="color:var(--upec-yellow)"></i> Tipos de Recursos Digitales
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                <strong>García Valcárcel (2020)</strong> los clasifica en: (a) <strong>objetos de aprendizaje</strong>, que son unidades autocontenidas con un objetivo pedagógico definido; (b) <strong>simulaciones y entornos virtuales</strong>, que recrean situaciones reales; (c) <strong>recursos multimedia interactivos</strong>, como presentaciones, videos educativos y podcasts; y (d) <strong>plataformas de gestión del aprendizaje (LMS)</strong>, que articulan múltiples recursos en un entorno digital integrado.
+                            </p>
+                        </div>
+
+                        <!-- Importancia -->
+                        <div class="content-block">
+                            <h3 class="font-black text-xl mb-3 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="star" class="w-5 h-5" style="color:var(--upec-yellow)"></i> Importancia en la Educación Inicial
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                En el nivel de Educación Inicial, el diseño cuidadoso de recursos digitales cobra una dimensión ética y pedagógica fundamental. Los materiales deben ser apropiados para la etapa del desarrollo infantil, visualmente estimulantes y libres de contenidos inapropiados. Según el <strong>Ministerio de Educación del Ecuador (2022)</strong>, la integración de recursos digitales debe responder a los ejes del desarrollo y aprendizaje establecidos en el currículo nacional, garantizando experiencias lúdicas, creativas y culturalmente pertinentes.
+                            </p>
+                        </div>
+
+                        <!-- Referencias -->
+                        <div style="background: #f8faf8; border-radius: 20px; padding: 28px; border: 1px solid #e0ece4;">
+                            <h4 class="font-black text-sm uppercase tracking-widest mb-4 flex items-center gap-2" style="color:var(--upec-green);">
+                                <i data-lucide="book-marked" class="w-4 h-4"></i> Referencias
+                            </h4>
+                            <div class="ref-item">Cabero Almenara, J. (2020). Aprendiendo del tiempo de la COVID-19: Reflexiones para la educación tecnológica. <em>Revista Electrónica de Tecnología Educativa, (73)</em>, 1–13.</div>
+                            <div class="ref-item">García Valcárcel, A. (2020). <em>Recursos digitales para la mejora de la enseñanza y el aprendizaje.</em> Universidad de Salamanca.</div>
+                            <div class="ref-item">Ministerio de Educación del Ecuador. (2022). <em>Currículo de Educación Inicial 2022.</em> Ministerio de Educación.</div>
+                            <div class="ref-item">Morales, P., y Torres, R. (2021). <em>Diseño instruccional y recursos digitales: Una perspectiva pedagógica contemporánea.</em> Ediciones UNED.</div>
+                            <div class="ref-item">Prendes Espinosa, M. P. (2022). <em>Tecnología educativa: Diseño y producción de medios para la enseñanza</em> (3.ª ed.). Pirámide.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== PUERICULTURA ===== -->
+            <div id="puericultura" class="page-transition">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="materia-badge">
+                            <i data-lucide="heart" class="w-3 h-3"></i> Unidad de Aprendizaje 02
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black leading-none mb-3" style="font-family:'Playfair Display',serif; font-style: italic;">Puericultura</h2>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">Cuidado integral del niño desde la concepción</p>
+                    </div>
+                    <div class="p-10 md:p-14 space-y-10">
+
+                        <!-- Definición + Video -->
+                        <div class="grid lg:grid-cols-2 gap-12 items-start">
+                            <div class="space-y-6">
+                                <h3 class="font-black text-2xl flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                    <i data-lucide="info" class="w-5 h-5" style="color:var(--upec-yellow)"></i> Definición
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    La puericultura es la rama de las ciencias de la salud y la educación que se ocupa del cuidado integral del niño desde su concepción hasta la adolescencia temprana, abarcando aspectos físicos, nutricionales, emocionales y sociales. De acuerdo con <strong>Álvarez Gómez y Muñoz Cano (2020)</strong>, comprende el conjunto de conocimientos y técnicas destinadas a promover el crecimiento y desarrollo óptimo del niño, prevenir enfermedades y fomentar su bienestar integral.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Esta disciplina ha evolucionado hacia una perspectiva interdisciplinaria que involucra a docentes, familias y comunidades. En el contexto educativo, la puericultura orienta las prácticas de cuidado en los centros de Educación Inicial, guiando al profesional en la atención a la salud, la alimentación, la higiene y el desarrollo psicomotor del niño.
+                                </p>
+                            </div>
+                            <div>
+                                <div class="video-frame">
+                                    <div style="aspect-ratio: 16/9; background: black;">
+                                        <iframe src="https://www.youtube.com/embed/iDVF8R3fGZs" class="w-full h-full" allowfullscreen style="border:none;"></iframe>
+                                    </div>
+                                </div>
+                                <p class="mt-4 text-center text-gray-400 text-sm flex items-center justify-center gap-2 italic">
+                                    <i data-lucide="youtube" class="w-4 h-4"></i> Licenciatura en Puericultura y Educación Infantil
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Áreas de intervención -->
+                        <div>
+                            <h3 class="font-black text-2xl mb-6 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="target" class="w-6 h-6" style="color:var(--upec-yellow)"></i> Áreas de Intervención
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                Según <strong>Coronado Velasco (2021)</strong>, la puericultura se desarrolla en diversas áreas fundamentales:
+                            </p>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <div class="info-card flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #e8f5ec, #d0edd8);">
+                                        <i data-lucide="apple" class="w-5 h-5" style="color:var(--upec-green)"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-black text-sm mb-1" style="color:var(--upec-green)">Alimentación y Nutrición</p>
+                                        <p class="text-gray-500 text-xs leading-relaxed">Pautas para una dieta equilibrada y saludable</p>
+                                    </div>
+                                </div>
+                                <div class="info-card flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #e8f5ec, #d0edd8);">
+                                        <i data-lucide="droplets" class="w-5 h-5" style="color:var(--upec-green)"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-black text-sm mb-1" style="color:var(--upec-green)">Higiene y Cuidado Corporal</p>
+                                        <p class="text-gray-500 text-xs leading-relaxed">Limpieza, baño y cuidado de la piel infantil</p>
+                                    </div>
+                                </div>
+                                <div class="info-card flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #fffbec, #fff5cc);">
+                                        <i data-lucide="moon" class="w-5 h-5" style="color:#c9a000"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-black text-sm mb-1" style="color:#c9a000">Sueño y Descanso</p>
+                                        <p class="text-gray-500 text-xs leading-relaxed">Orientaciones sobre ritmos de sueño saludables</p>
+                                    </div>
+                                </div>
+                                <div class="info-card flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #e8f5ec, #d0edd8);">
+                                        <i data-lucide="brain" class="w-5 h-5" style="color:var(--upec-green)"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-black text-sm mb-1" style="color:var(--upec-green)">Estimulación Temprana</p>
+                                        <p class="text-gray-500 text-xs leading-relaxed">Desarrollo cognitivo, motor y socioafectivo</p>
+                                    </div>
+                                </div>
+                                <div class="info-card flex items-start gap-4">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #e8f5ec, #d0edd8);">
+                                        <i data-lucide="shield-check" class="w-5 h-5" style="color:var(--upec-green)"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-black text-sm mb-1" style="color:var(--upec-green)">Vacunación y Prevención</p>
+                                        <p class="text-gray-500 text-xs leading-relaxed">Protección de la salud infantil contra enfermedades</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rol del educador -->
+                        <div class="content-block">
+                            <h3 class="font-black text-xl mb-3 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="user-check" class="w-5 h-5" style="color:var(--upec-yellow)"></i> El Rol del Educador en la Puericultura
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                El docente de Educación Inicial desempeña un papel protagónico en la aplicación de principios de puericultura dentro del aula. Más allá del rol pedagógico, el educador actúa como observador del desarrollo infantil, identificando señales de alerta y coordinando con familias y el equipo de salud cuando es necesario. <strong>Peralta Espinosa (2022)</strong> afirma que la formación en puericultura permite al docente construir ambientes de aprendizaje seguros, higiénicos y emocionalmente nutritivos.
+                            </p>
+                        </div>
+
+                        <!-- Ecuador -->
+                        <div class="highlight-quote">
+                            <strong>🇪🇨 Importancia en Ecuador:</strong> En el Ecuador, la puericultura está vinculada con las políticas del Ministerio de Salud Pública y el MIES. El programa <em>Creciendo con Nuestros Hijos (CNH)</em> y los Centros de Desarrollo Infantil Integral (CIBV) aplican principios de puericultura para garantizar el desarrollo pleno de los niños en situación de vulnerabilidad. Según el <strong>MIES (2021)</strong>, estos programas atienden a más de 330,000 niños en todo el país.
+                        </div>
+
+                        <!-- Referencias -->
+                        <div style="background: #f8faf8; border-radius: 20px; padding: 28px; border: 1px solid #e0ece4;">
+                            <h4 class="font-black text-sm uppercase tracking-widest mb-4 flex items-center gap-2" style="color:var(--upec-green);">
+                                <i data-lucide="book-marked" class="w-4 h-4"></i> Referencias
+                            </h4>
+                            <div class="ref-item">Álvarez Gómez, M., y Muñoz Cano, J. M. (2020). <em>Puericultura: Fundamentos y aplicaciones en la atención infantil</em> (2.ª ed.). Manual Moderno.</div>
+                            <div class="ref-item">Coronado Velasco, C. (2021). <em>Enfermería pediátrica y puericultura: Cuidados integrales del niño sano.</em> Elsevier.</div>
+                            <div class="ref-item">Ministerio de Inclusión Económica y Social [MIES]. (2021). <em>Informe de gestión de los servicios de desarrollo infantil integral.</em> MIES.</div>
+                            <div class="ref-item">Peralta Espinosa, M. V. (2022). <em>Educación inicial de calidad: Puericultura, pedagogía y derechos de la infancia.</em> Ediciones JUNJI.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== INCLUSIÓN EDUCATIVA ===== -->
+            <div id="inclusion" class="page-transition">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="materia-badge">
+                            <i data-lucide="users" class="w-3 h-3"></i> Unidad de Aprendizaje 03
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black leading-none mb-3" style="font-family:'Playfair Display',serif;">Inclusión Educativa<br>para el Nivel Inicial</h2>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">Equidad, participación y diversidad en la educación</p>
+                    </div>
+                    <div class="p-10 md:p-14 space-y-10">
+
+                        <!-- Definición + Video -->
+                        <div class="grid lg:grid-cols-2 gap-12 items-start">
+                            <div class="space-y-6">
+                                <h3 class="font-black text-2xl flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                    <i data-lucide="info" class="w-5 h-5" style="color:var(--upec-yellow)"></i> Definición
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    La inclusión educativa es el proceso mediante el cual el sistema educativo garantiza el acceso, la participación y el aprendizaje de todos los estudiantes, independientemente de sus capacidades, origen cultural, género o condición socioeconómica. <strong>Ainscow y Booth (2021)</strong> la definen como el conjunto de procesos orientados a aumentar la participación de los estudiantes en la cultura, el currículo y las comunidades de las escuelas locales, implicando reducir activamente cualquier forma de exclusión.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    En el nivel de Educación Inicial, la inclusión adquiere particular importancia porque los primeros años de vida son determinantes para el desarrollo cognitivo, emocional y social. Una educación inicial inclusiva sienta las bases de una trayectoria escolar equitativa y de una sociedad más justa.
+                                </p>
+                            </div>
+                            <div>
+                                <div class="video-frame">
+                                    <div style="aspect-ratio: 16/9; background: black;">
+                                        <iframe src="https://www.youtube.com/embed/dD0KZ9g8c_0" class="w-full h-full" allowfullscreen style="border:none;"></iframe>
+                                    </div>
+                                </div>
+                                <p class="mt-4 text-center text-gray-400 text-sm flex items-center justify-center gap-2 italic">
+                                    <i data-lucide="youtube" class="w-4 h-4"></i> Inclusión Educativa en el Nivel Inicial
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Principios -->
+                        <div>
+                            <h3 class="font-black text-2xl mb-6 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="compass" class="w-6 h-6" style="color:var(--upec-yellow)"></i> Principios de la Educación Inclusiva
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed mb-6">Según la <strong>UNESCO (2020)</strong>, los principios que fundamentan la educación inclusiva son:</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-4 p-4 rounded-xl transition-all hover:translate-x-2" style="background: rgba(0,92,48,0.05); border-left: 4px solid var(--upec-green);">
+                                    <span class="w-10 h-10 rounded-full flex items-center justify-center font-black text-white text-sm flex-shrink-0" style="background: var(--upec-green);">a</span>
+                                    <div><strong class="text-gray-800">Equidad:</strong> <span class="text-gray-600">distribución justa de recursos y oportunidades educativas.</span></div>
+                                </div>
+                                <div class="flex items-center gap-4 p-4 rounded-xl transition-all hover:translate-x-2" style="background: rgba(255,198,0,0.08); border-left: 4px solid var(--upec-yellow);">
+                                    <span class="w-10 h-10 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0" style="background: var(--upec-yellow); color: var(--upec-green);">b</span>
+                                    <div><strong class="text-gray-800">Participación:</strong> <span class="text-gray-600">voz activa de todos los estudiantes en el proceso educativo.</span></div>
+                                </div>
+                                <div class="flex items-center gap-4 p-4 rounded-xl transition-all hover:translate-x-2" style="background: rgba(0,92,48,0.05); border-left: 4px solid var(--upec-green);">
+                                    <span class="w-10 h-10 rounded-full flex items-center justify-center font-black text-white text-sm flex-shrink-0" style="background: var(--upec-green);">c</span>
+                                    <div><strong class="text-gray-800">Diversidad:</strong> <span class="text-gray-600">reconocida como un valor que enriquece la comunidad educativa.</span></div>
+                                </div>
+                                <div class="flex items-center gap-4 p-4 rounded-xl transition-all hover:translate-x-2" style="background: rgba(255,198,0,0.08); border-left: 4px solid var(--upec-yellow);">
+                                    <span class="w-10 h-10 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0" style="background: var(--upec-yellow); color: var(--upec-green);">d</span>
+                                    <div><strong class="text-gray-800">Pertinencia:</strong> <span class="text-gray-600">adaptar el currículo a las necesidades individuales de cada estudiante.</span></div>
+                                </div>
+                                <div class="flex items-center gap-4 p-4 rounded-xl transition-all hover:translate-x-2" style="background: rgba(0,92,48,0.05); border-left: 4px solid var(--upec-green);">
+                                    <span class="w-10 h-10 rounded-full flex items-center justify-center font-black text-white text-sm flex-shrink-0" style="background: var(--upec-green);">e</span>
+                                    <div><strong class="text-gray-800">Calidad:</strong> <span class="text-gray-600">estándares altos para todos los estudiantes sin excepción.</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Estrategias -->
+                        <div class="content-block">
+                            <h3 class="font-black text-xl mb-3 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="lightbulb" class="w-5 h-5" style="color:var(--upec-yellow)"></i> Estrategias para la Inclusión en el Aula
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                <strong>Arnáiz Sánchez (2021)</strong> sugiere el uso del Diseño Universal para el Aprendizaje (DUA), que consiste en planificar desde el inicio materiales y actividades accesibles para todos. Otras estrategias incluyen el aprendizaje cooperativo, la diferenciación curricular, el uso de pictogramas y sistemas aumentativos de comunicación, y la colaboración con equipos interdisciplinarios.
+                            </p>
+                        </div>
+
+                        <!-- Marco legal Ecuador -->
+                        <div class="highlight-quote">
+                            <strong>⚖️ Marco Legal en Ecuador:</strong> La Constitución de la República (2008) en su artículo 26 establece la educación como un derecho irrenunciable, mientras que la <em>Ley Orgánica de Educación Intercultural (LOEI, 2011)</em> en su artículo 47 obliga a las instituciones educativas a garantizar la inclusión e integración de personas con necesidades educativas especiales. El <strong>Ministerio de Educación (2023)</strong> ha publicado guías para la implementación del Modelo de Educación Inclusiva en todos los niveles.
+                        </div>
+
+                        <!-- Referencias -->
+                        <div style="background: #f8faf8; border-radius: 20px; padding: 28px; border: 1px solid #e0ece4;">
+                            <h4 class="font-black text-sm uppercase tracking-widest mb-4 flex items-center gap-2" style="color:var(--upec-green);">
+                                <i data-lucide="book-marked" class="w-4 h-4"></i> Referencias
+                            </h4>
+                            <div class="ref-item">Ainscow, M., y Booth, T. (2021). <em>Guía para la educación inclusiva: Desarrollando el aprendizaje y la participación en los centros escolares</em> (3.ª ed.). OEI-FUHEM.</div>
+                            <div class="ref-item">Arnáiz Sánchez, P. (2021). <em>Educación inclusiva: Una escuela para todos.</em> Aljibe.</div>
+                            <div class="ref-item">Constitución de la República del Ecuador. (2008). Asamblea Nacional Constituyente.</div>
+                            <div class="ref-item">Ministerio de Educación del Ecuador. (2023). <em>Modelo de educación inclusiva.</em> Ministerio de Educación.</div>
+                            <div class="ref-item">UNESCO. (2020). <em>Educación inclusiva: De la retórica a la práctica.</em> UNESCO.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CURRÍCULO ===== -->
+            <div id="curriculo" class="page-transition">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="materia-badge">
+                            <i data-lucide="book-open" class="w-3 h-3"></i> Unidad de Aprendizaje 04
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black leading-none mb-3" style="font-family:'Playfair Display',serif;">Abordaje Pedagógico<br>Curricular</h2>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">Para la Educación Inicial en Ecuador</p>
+                    </div>
+                    <div class="p-10 md:p-14 space-y-10">
+
+                        <!-- Definición + Video -->
+                        <div class="grid lg:grid-cols-2 gap-12 items-start">
+                            <div class="space-y-6">
+                                <h3 class="font-black text-2xl flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                    <i data-lucide="info" class="w-5 h-5" style="color:var(--upec-yellow)"></i> Definición
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    El abordaje pedagógico curricular para Educación Inicial hace referencia al conjunto de enfoques, metodologías y marcos teóricos que orientan la planificación, implementación y evaluación de los procesos educativos en la primera infancia. De acuerdo con <strong>Peralta Espinosa y Fujimoto Gómez (2020)</strong>, el currículo de Educación Inicial debe entenderse como una propuesta integral que articula el desarrollo del niño con las intenciones pedagógicas del educador, en un contexto cultural y social determinado.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    Este abordaje reconoce al niño como un sujeto activo, portador de derechos y protagonista de su propio aprendizaje. El currículo se convierte en un espacio de experiencias significativas que promueven el desarrollo integral en todas sus dimensiones: cognitiva, motora, socioafectiva, comunicativa y ética.
+                                </p>
+                            </div>
+                            <div>
+                                <div class="video-frame">
+                                    <div style="aspect-ratio: 16/9; background: black;">
+                                        <iframe src="https://www.youtube.com/embed/CYJW9crLON0" class="w-full h-full" allowfullscreen style="border:none;"></iframe>
+                                    </div>
+                                </div>
+                                <p class="mt-4 text-center text-gray-400 text-sm flex items-center justify-center gap-2 italic">
+                                    <i data-lucide="youtube" class="w-4 h-4"></i> Generalidades del Currículo de Educación Inicial Ecuador
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Enfoques pedagógicos -->
+                        <div>
+                            <h3 class="font-black text-2xl mb-6 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="cpu" class="w-6 h-6" style="color:var(--upec-yellow)"></i> Enfoques Pedagógicos Relevantes
+                            </h3>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="info-card" style="border-top: 3px solid var(--upec-green);">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background: linear-gradient(135deg, #e8f5ec, #d0edd8);">
+                                        <i data-lucide="git-branch" class="w-5 h-5" style="color:var(--upec-green)"></i>
+                                    </div>
+                                    <p class="font-black text-sm mb-2" style="color:var(--upec-green)">Constructivismo</p>
+                                    <p class="text-gray-500 text-xs leading-relaxed">Jean Piaget: centra el aprendizaje en la acción del niño sobre el entorno.</p>
+                                </div>
+                                <div class="info-card" style="border-top: 3px solid var(--upec-yellow);">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background: linear-gradient(135deg, #fffbec, #fff5cc);">
+                                        <i data-lucide="users-2" class="w-5 h-5" style="color:#c9a000"></i>
+                                    </div>
+                                    <p class="font-black text-sm mb-2" style="color:#c9a000">Histórico-Cultural</p>
+                                    <p class="text-gray-500 text-xs leading-relaxed">Vygotski: papel de la interacción social y la zona de desarrollo próximo.</p>
+                                </div>
+                                <div class="info-card" style="border-top: 3px solid var(--upec-green);">
+                                    <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style="background: linear-gradient(135deg, #e8f5ec, #d0edd8);">
+                                        <i data-lucide="ear" class="w-5 h-5" style="color:var(--upec-green)"></i>
+                                    </div>
+                                    <p class="font-black text-sm mb-2" style="color:var(--upec-green)">Pedagogía de la Escucha</p>
+                                    <p class="text-gray-500 text-xs leading-relaxed">Reggio Emilia (Malaguzzi): expresión e investigación infantil como motores del aprendizaje.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Currículo Ecuador -->
+                        <div>
+                            <h3 class="font-black text-2xl mb-6 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="flag" class="w-6 h-6" style="color:var(--upec-yellow)"></i> El Currículo de Educación Inicial en Ecuador
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                El Currículo de Educación Inicial del Ecuador (<strong>Ministerio de Educación, 2022</strong>) se organiza en dos subniveles: Inicial 1 (0 a 3 años) e Inicial 2 (3 a 5 años). Adopta un enfoque de derechos, intercultural, inclusivo y de género, y valora el juego como la actividad central de la infancia.
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-4 p-5 rounded-2xl transition-all hover:translate-x-2" style="background: rgba(0,92,48,0.05); border-left: 5px solid var(--upec-green);">
+                                    <span class="w-12 h-12 rounded-full flex items-center justify-center font-black text-white flex-shrink-0" style="background: var(--upec-green);">01</span>
+                                    <p class="font-bold text-sm uppercase text-gray-700">Eje de Desarrollo Personal y Social</p>
+                                </div>
+                                <div class="flex items-center gap-4 p-5 rounded-2xl transition-all hover:translate-x-2" style="background: rgba(255,198,0,0.08); border-left: 5px solid var(--upec-yellow);">
+                                    <span class="w-12 h-12 rounded-full flex items-center justify-center font-black flex-shrink-0" style="background: var(--upec-yellow); color: var(--upec-green);">02</span>
+                                    <p class="font-bold text-sm uppercase text-gray-700">Eje de Descubrimiento Natural y Cultural</p>
+                                </div>
+                                <div class="flex items-center gap-4 p-5 rounded-2xl transition-all hover:translate-x-2" style="background: rgba(0,92,48,0.05); border-left: 5px solid var(--upec-green);">
+                                    <span class="w-12 h-12 rounded-full flex items-center justify-center font-black text-white flex-shrink-0" style="background: var(--upec-green);">03</span>
+                                    <p class="font-bold text-sm uppercase text-gray-700">Eje de Expresión y Comunicación</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Planificación -->
+                        <div class="content-block">
+                            <h3 class="font-black text-xl mb-3 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="clipboard-list" class="w-5 h-5" style="color:var(--upec-yellow)"></i> Planificación Curricular
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed">
+                                <strong>Zabalza Beraza (2021)</strong> señala que una planificación efectiva debe partir del diagnóstico del grupo, definir objetivos de aprendizaje claros, seleccionar estrategias metodológicas pertinentes y establecer criterios de evaluación formativa. En este nivel, la planificación se expresa a través de proyectos de aula, rincones de aprendizaje y experiencias de juego dirigido que integran los distintos ámbitos del currículo.
+                            </p>
+                        </div>
+
+                        <!-- Referencias -->
+                        <div style="background: #f8faf8; border-radius: 20px; padding: 28px; border: 1px solid #e0ece4;">
+                            <h4 class="font-black text-sm uppercase tracking-widest mb-4 flex items-center gap-2" style="color:var(--upec-green);">
+                                <i data-lucide="book-marked" class="w-4 h-4"></i> Referencias
+                            </h4>
+                            <div class="ref-item">Bralic, S., y Mercer, R. (2021). <em>Educación inicial y pedagogía crítica en América Latina: Enfoques y desafíos.</em> FLACSO.</div>
+                            <div class="ref-item">Ministerio de Educación del Ecuador. (2022). <em>Currículo de Educación Inicial (actualización 2022).</em> Ministerio de Educación.</div>
+                            <div class="ref-item">Peralta Espinosa, M. V., y Fujimoto Gómez, G. (2020). <em>La atención integral de la primera infancia en América Latina</em> (2.ª ed.). OEA.</div>
+                            <div class="ref-item">Zabalza Beraza, M. Á. (2021). <em>Didáctica de la Educación Infantil</em> (5.ª ed.). Narcea.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== LENGUAJE ===== -->
+            <div id="lenguaje" class="page-transition">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="materia-badge">
+                            <i data-lucide="message-circle" class="w-3 h-3"></i> Unidad de Aprendizaje 05
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black leading-none mb-3" style="font-family:'Playfair Display',serif;">Desarrollo del Pensamiento<br>y Lenguaje</h2>
+                        <p style="color: rgba(255,255,255,0.6); font-size: 14px;">"El lenguaje es la herramienta de abstracción principal del infante."</p>
+                    </div>
+                    <div class="p-10 md:p-14 space-y-10">
+
+                        <!-- Definición + Video -->
+                        <div class="grid lg:grid-cols-2 gap-12 items-start">
+                            <div class="space-y-6">
+                                <h3 class="font-black text-2xl flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                    <i data-lucide="info" class="w-5 h-5" style="color:var(--upec-yellow)"></i> Definición
+                                </h3>
+                                <p class="text-gray-700 leading-relaxed">
+                                    El desarrollo del pensamiento y el lenguaje constituyen dos procesos íntimamente relacionados que se desarrollan de manera simultánea y se potencian mutuamente durante la primera infancia. <strong>Vygotski (citado en Kozulin, 2020)</strong> planteó que el pensamiento y el lenguaje son raíces genéticamente distintas que, en algún momento del desarrollo, convergen para formar el pensamiento verbal y el lenguaje racional. Esta convergencia es especialmente activa entre los 2 y 7 años, período que coincide con la etapa de Educación Inicial.
+                                </p>
+                                <p class="text-gray-700 leading-relaxed">
+                                    El pensamiento infantil evoluciona desde etapas sensoriomotoras hasta operaciones concretas, pasando por el pensamiento simbólico y preoperacional descrito por Piaget. El lenguaje, por su parte, no solo cumple una función comunicativa, sino que actúa como herramienta del pensamiento, permitiendo al niño categorizar, abstraer y resolver problemas.
+                                </p>
+                            </div>
+                            <div>
+                                <div class="video-frame">
+                                    <div style="aspect-ratio: 16/9; background: black;">
+                                        <iframe src="https://www.youtube.com/embed/Ae5n33PC2kk" class="w-full h-full" allowfullscreen style="border:none;"></iframe>
+                                    </div>
+                                </div>
+                                <p class="mt-4 text-center text-gray-400 text-sm flex items-center justify-center gap-2 italic">
+                                    <i data-lucide="youtube" class="w-4 h-4"></i> 12 herramientas educativas digitales para mejorar el aprendizaje
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Etapas del lenguaje -->
+                        <div>
+                            <h3 class="font-black text-2xl mb-6 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="milestone" class="w-6 h-6" style="color:var(--upec-yellow)"></i> Etapas del Desarrollo del Lenguaje
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed mb-6">Según <strong>Owens (2021)</strong>, el lenguaje infantil atraviesa etapas sucesivas:</p>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <div class="info-card text-center">
+                                    <div class="text-3xl mb-3">🍼</div>
+                                    <p class="font-black text-lg mb-1" style="color:var(--upec-green)">0–12 meses</p>
+                                    <p class="font-bold text-xs uppercase tracking-widest mb-2" style="color:var(--upec-yellow)">Prelingüística</p>
+                                    <p class="text-gray-500 text-xs">Balbuceo y comunicación gestual</p>
+                                </div>
+                                <div class="info-card text-center" style="border: 2px solid var(--upec-yellow); transform: scale(1.05);">
+                                    <div class="text-3xl mb-3">💬</div>
+                                    <p class="font-black text-lg mb-1" style="color:var(--upec-green)">12–18 meses</p>
+                                    <p class="font-bold text-xs uppercase tracking-widest mb-2" style="color:var(--upec-yellow)">Holofrástica</p>
+                                    <p class="text-gray-500 text-xs">Expresa ideas con una sola palabra</p>
+                                </div>
+                                <div class="info-card text-center">
+                                    <div class="text-3xl mb-3">🗣️</div>
+                                    <p class="font-black text-lg mb-1" style="color:var(--upec-green)">18–24 meses</p>
+                                    <p class="font-bold text-xs uppercase tracking-widest mb-2" style="color:var(--upec-yellow)">Dos Palabras</p>
+                                    <p class="text-gray-500 text-xs">Combinaciones simples de palabras</p>
+                                </div>
+                                <div class="info-card text-center">
+                                    <div class="text-3xl mb-3">📢</div>
+                                    <p class="font-black text-lg mb-1" style="color:var(--upec-green)">2–3 años</p>
+                                    <p class="font-bold text-xs uppercase tracking-widest mb-2" style="color:var(--upec-yellow)">Telegráfica</p>
+                                    <p class="text-gray-500 text-xs">Frases cortas sin conectores</p>
+                                </div>
+                                <div class="info-card text-center">
+                                    <div class="text-3xl mb-3">📖</div>
+                                    <p class="font-black text-lg mb-1" style="color:var(--upec-green)">3–6 años</p>
+                                    <p class="font-bold text-xs uppercase tracking-widest mb-2" style="color:var(--upec-yellow)">Sintaxis</p>
+                                    <p class="text-gray-500 text-xs">Adquisición de la sintaxis básica</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Estrategias -->
+                        <div class="content-block">
+                            <h3 class="font-black text-xl mb-4 flex items-center gap-3" style="color: var(--upec-green); font-family:'Playfair Display',serif;">
+                                <i data-lucide="lightbulb" class="w-5 h-5" style="color:var(--upec-yellow)"></i> Estrategias para Estimular el Pensamiento y el Lenguaje
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed mb-4">
+                                <strong>Papalia y Martorell (2021)</strong> recomiendan las siguientes estrategias:
+                            </p>
+                            <div class="grid md:grid-cols-2 gap-3">
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:var(--upec-green)"></i>
+                                    <p class="text-gray-700 text-sm"><strong>Lectura compartida de cuentos</strong>, que amplía el vocabulario infantil.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:var(--upec-green)"></i>
+                                    <p class="text-gray-700 text-sm"><strong>Conversaciones contextualizadas</strong>, que desarrollan la capacidad argumentativa.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:var(--upec-green)"></i>
+                                    <p class="text-gray-700 text-sm"><strong>Juego simbólico y de roles</strong>, que favorece el uso creativo del lenguaje.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i data-lucide="check-circle-2" class="w-5 h-5 flex-shrink-0 mt-0.5" style="color:var(--upec-green)"></i>
+                                    <p class="text-gray-700 text-sm"><strong>Actividades de clasificación, seriación y comparación</strong> que estimulan el pensamiento lógico-matemático.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Señales de alerta -->
+                        <div class="highlight-quote">
+                            <strong>⚠️ Señales de Alerta:</strong> Según <strong>Aguilera Albesa y Botella Astillero (2020)</strong>, algunas señales incluyen: ausencia de balbuceo a los 12 meses, no pronunciar palabras aisladas a los 16 meses, no combinar dos palabras a los 24 meses, pérdida de habilidades lingüísticas ya adquiridas, o dificultades significativas para ser comprendido después de los 3 años. Ante estas señales, es fundamental la derivación oportuna a un especialista en lenguaje.
+                        </div>
+
+                        <!-- Referencias -->
+                        <div style="background: #f8faf8; border-radius: 20px; padding: 28px; border: 1px solid #e0ece4;">
+                            <h4 class="font-black text-sm uppercase tracking-widest mb-4 flex items-center gap-2" style="color:var(--upec-green);">
+                                <i data-lucide="book-marked" class="w-4 h-4"></i> Referencias
+                            </h4>
+                            <div class="ref-item">Aguilera Albesa, S., y Botella Astillero, A. (2020). <em>Trastornos del lenguaje y la comunicación en la infancia.</em> Pediátrica.</div>
+                            <div class="ref-item">Kozulin, A. (Comp.). (2020). <em>Pensamiento y lenguaje: Obras escogidas de Vygotski</em> (M. M. Rotger, Trad.). Paidós. (Obra original publicada en 1934).</div>
+                            <div class="ref-item">Owens, R. E. (2021). <em>Desarrollo del lenguaje</em> (8.ª ed.). Pearson Educación.</div>
+                            <div class="ref-item">Papalia, D. E., y Martorell, G. (2021). <em>Desarrollo humano</em> (13.ª ed.). McGraw-Hill.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== REFERENCIAS ===== -->
+            <div id="referencias" class="page-transition">
+                <div class="section-card">
+                    <div class="section-header">
+                        <div class="materia-badge">
+                            <i data-lucide="book-marked" class="w-3 h-3"></i> Bibliografía Académica
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black leading-none" style="font-family:'Playfair Display',serif;">Referencias</h2>
+                    </div>
+                    <div class="p-10 md:p-14">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 class="font-black text-sm uppercase tracking-widest mb-4" style="color:var(--upec-green);">A – M</h3>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Aguilera Albesa, S., y Botella Astillero, A. (2020). <em>Trastornos del lenguaje y la comunicación en la infancia.</em> Pediátrica.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Ainscow, M., y Booth, T. (2021). <em>Guía para la educación inclusiva</em> (3.ª ed.). OEI-FUHEM.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Álvarez Gómez, M. (2020). <em>Puericultura integral</em> (2.ª ed.). Manual Moderno.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Arnáiz Sánchez, P. (2021). <em>Educación inclusiva: Una escuela para todos.</em> Aljibe.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Cabero Almenara, J. (2020). Aprendiendo del tiempo de la COVID-19. <em>Revista Electrónica de Tecnología Educativa, (73)</em>, 1–13.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Coronado Velasco, C. (2021). <em>Enfermería pediátrica y puericultura.</em> Elsevier.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">García Valcárcel, A. (2020). <em>Recursos digitales para la mejora de la enseñanza.</em> Universidad de Salamanca.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Kozulin, A. (Comp.). (2020). <em>Pensamiento y lenguaje: Obras escogidas de Vygotski.</em> Paidós.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Ministerio de Educación del Ecuador. (2022). <em>Currículo de Educación Inicial 2022.</em> Ministerio de Educación.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Ministerio de Inclusión Económica y Social [MIES]. (2021). <em>Informe de gestión de los servicios de desarrollo infantil integral.</em> MIES.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-green)">Morales, P., y Torres, R. (2021). <em>Diseño instruccional y recursos digitales.</em> Ediciones UNED.</div>
+                            </div>
+                            <div>
+                                <h3 class="font-black text-sm uppercase tracking-widest mb-4" style="color:var(--upec-green);">O – Z</h3>
+                                <div class="ref-item" style="border-left-color:var(--upec-yellow)">Owens, R. E. (2021). <em>Desarrollo del lenguaje</em> (8.ª ed.). Pearson Educación.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-yellow)">Papalia, D. E., y Martorell, G. (2021). <em>Desarrollo humano</em> (13.ª ed.). McGraw-Hill.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-yellow)">Peralta Espinosa, M. V. (2022). <em>Puericultura, pedagogía y derechos.</em> JUNJI.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-yellow)">Peralta Espinosa, M. V., y Fujimoto Gómez, G. (2020). <em>La atención integral de la primera infancia en América Latina</em> (2.ª ed.). OEA.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-yellow)">Prendes Espinosa, M. P. (2022). <em>Tecnología educativa: Diseño y producción de medios para la enseñanza</em> (3.ª ed.). Pirámide.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-yellow)">UNESCO. (2020). <em>Educación inclusiva: De la retórica a la práctica.</em> UNESCO.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-yellow)">Zabalza Beraza, M. Á. (2021). <em>Didáctica de la Educación Infantil</em> (5.ª ed.). Narcea.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-yellow)">Bralic, S., y Mercer, R. (2021). <em>Educación inicial y pedagogía crítica en América Latina.</em> FLACSO.</div>
+                                <div class="ref-item" style="border-left-color:var(--upec-yellow)">Arnáiz Sánchez, P. (2021). <em>Educación inclusiva: Una escuela para todos.</em> Aljibe.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- Main footer content -->
+            <div class="grid md:grid-cols-3 gap-12 mb-16">
+
+                <!-- Brand -->
+                <div class="md:col-span-1">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://i.ibb.co/tMsj3DRS/A.png" alt="Logo" class="h-16 w-auto" style="filter: drop-shadow(0 4px 12px rgba(255,198,0,0.3));">
+                        <div>
+                            <p class="footer-logo-text font-black text-2xl tracking-tighter leading-none" style="font-family:'Playfair Display',serif;">DIANA ALOMOTO</p>
+                            <p style="color: rgba(255,255,255,0.4); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; margin-top: 4px;">Blog Académico</p>
+                        </div>
+                    </div>
+                    <p style="color: rgba(255,255,255,0.5); font-size: 14px; line-height: 1.7;">
+                        Portafolio digital desarrollado para recopilar y presentar los aprendizajes del tercer semestre de Educación Inicial.
+                    </p>
+                </div>
+
+                <!-- Student info -->
+                <div>
+                    <h4 style="color: var(--upec-yellow); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 20px;">
+                        <i data-lucide="user" class="w-3 h-3 inline-block mr-2"></i> Estudiante
+                    </h4>
+                    <div class="space-y-3">
+                        <div>
+                            <p style="color:rgba(255,255,255,0.35); font-size:11px; text-transform:uppercase; letter-spacing:0.1em;">Nombre completo</p>
+                            <p style="color:white; font-weight:600; font-size:15px;">Diana Lisbeth Alomoto Sandoval</p>
+                        </div>
+                        <div>
+                            <p style="color:rgba(255,255,255,0.35); font-size:11px; text-transform:uppercase; letter-spacing:0.1em;">Carrera</p>
+                            <p style="color:white; font-weight:600; font-size:15px;">Educación Inicial · 3er Semestre 03 A-M</p>
+                        </div>
+                        <div>
+                            <p style="color:rgba(255,255,255,0.35); font-size:11px; text-transform:uppercase; letter-spacing:0.1em;">Institución</p>
+                            <p style="color:white; font-weight:600; font-size:15px;">UPEC · Tulcán, Ecuador</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links + Social -->
+                <div>
+                    <h4 style="color: var(--upec-yellow); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 20px;">
+                        <i data-lucide="link" class="w-3 h-3 inline-block mr-2"></i> Navegación
+                    </h4>
+                    <div class="space-y-2 mb-8">
+                        <button onclick="showPage('recursos')" class="block text-left w-full" style="color:rgba(255,255,255,0.6); font-size:14px; transition: color 0.2s; background:none; border:none; cursor:pointer; padding:0;" onmouseover="this.style.color='var(--upec-yellow)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">→ Recursos Digitales</button>
+                        <button onclick="showPage('puericultura')" class="block text-left w-full" style="color:rgba(255,255,255,0.6); font-size:14px; transition: color 0.2s; background:none; border:none; cursor:pointer; padding:0;" onmouseover="this.style.color='var(--upec-yellow)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">→ Puericultura</button>
+                        <button onclick="showPage('inclusion')" class="block text-left w-full" style="color:rgba(255,255,255,0.6); font-size:14px; transition: color 0.2s; background:none; border:none; cursor:pointer; padding:0;" onmouseover="this.style.color='var(--upec-yellow)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">→ Inclusión Educativa</button>
+                        <button onclick="showPage('curriculo')" class="block text-left w-full" style="color:rgba(255,255,255,0.6); font-size:14px; transition: color 0.2s; background:none; border:none; cursor:pointer; padding:0;" onmouseover="this.style.color='var(--upec-yellow)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">→ Abordaje Curricular</button>
+                        <button onclick="showPage('lenguaje')" class="block text-left w-full" style="color:rgba(255,255,255,0.6); font-size:14px; transition: color 0.2s; background:none; border:none; cursor:pointer; padding:0;" onmouseover="this.style.color='var(--upec-yellow)'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">→ Pensamiento y Lenguaje</button>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <a href="#" class="social-btn"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                        <a href="#" class="social-btn"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                        <a href="#" class="social-btn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                        <a href="#" class="social-btn"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer bottom -->
+            <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 32px; display: flex; flex-direction: column; md:flex-direction: row; align-items: center; justify-content: space-between; gap: 12px; text-align: center;">
+                <p style="color:rgba(255,255,255,0.2); font-size:11px; text-transform:uppercase; letter-spacing:0.3em;">
+                    © 2025 · Proyecto Académico Digital · Todos los derechos reservados
+                </p>
+                <div class="flex items-center gap-2" style="color:rgba(255,255,255,0.2); font-size:11px;">
+                    <i data-lucide="building-2" class="w-3 h-3"></i>
+                    <span>Universidad Politécnica Estatal del Carchi</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-transition').forEach(p => p.classList.remove('page-active'));
+            const page = document.getElementById(pageId);
+            if (page) page.classList.add('page-active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.toggle('nav-link-active', btn.getAttribute('data-page') === pageId);
+            });
+
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        window.onload = () => {
+            showPage('inicio');
+        };
+    </script>
+</body>
+</html>

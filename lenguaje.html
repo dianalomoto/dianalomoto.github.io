@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pensamiento y Lenguaje - Diana Alomoto</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/jZqMKjSS/dianalomoto.png">
+    
+    <!-- Tailwind & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- CSS Personalizado Global -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Ko vore ohechauka mba'eichapa ojehechata pe roguy */
+        body {
+            background-color: #f8fafc; 
+            color: #1e293b;
+        }
+
+        .section-container {
+            background: white;
+            border-radius: 32px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .materia-title {
+            color: #005c30;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .accent-bar {
+            width: 60px;
+            height: 4px;
+            background-color: #ffc600;
+            border-radius: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .image-wrapper {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            border: 1px solid #e2e8f0;
+            width: 100%;
+            height: auto;
+            background: #eee;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .etapa-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .etapa-card:hover {
+            border-color: #ffc600;
+            background: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .upec-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .upec-list-bullet {
+            color: #ffc600;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .btn-outline-upec {
+            border: 2px solid #005c30;
+            color: #005c30;
+            background: transparent;
+            padding: 0.9rem 1.8rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-upec:hover {
+            background: #005c30;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .video-container {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            background: black;
+            aspect-ratio: 16/9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Ko vore omoĩ pe yvatepegua -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- Header con identidad UPEC -->
+    <header class="pt-32 pb-16 bg-[#005c30] text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="animate-fade-up">
+                <span class="inline-flex items-center gap-2 text-[#ffc600] text-[10px] font-black uppercase tracking-[0.3em] bg-white/10 px-4 py-2 rounded-full mb-6">
+                    <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> Unidad de Aprendizaje 05
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black leading-tight font-serif mb-4">
+                    Desarrollo del<br>
+                    <span class="text-[#ffc600] italic">Pensamiento y Lenguaje</span>
+                </h1>
+                <p class="text-white/70 text-sm md:text-base max-w-2xl font-medium">
+                    Analizando la interconexión entre las funciones cognitivas y la adquisición del lenguaje racional en la infancia.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="py-16">
+        <div class="max-w-7xl mx-auto px-6 space-y-16">
+            
+            <!-- SECCIÓN 01: DEFINICIÓN -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-up">
+                    <div class="accent-bar"></div>
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">01.</span> Definición
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base space-y-4 text-justify">
+                        <p>
+                            El desarrollo del pensamiento y el lenguaje constituyen dos procesos íntimamente relacionados que se potencian mutuamente. <span class="font-bold text-[#005c30]">Vygotski (citado en Kozulin, 2020)</span> planteó que son raíces genéticamente distintas que convergen para formar el pensamiento verbal.
+                        </p>
+                        <p>
+                            Esta convergencia es especialmente activa entre los 2 y 7 años. El lenguaje no solo cumple una función comunicativa, sino que actúa como la herramienta principal para categorizar, abstraer y resolver problemas complejos en el entorno del niño.
+                        </p>
+                    </div>
+                </div>
+                <div class="animate-fade-up" style="animation-delay: 0.2s;">
+                    <div class="image-wrapper">
+                        <!--  -->
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkAM3zZzFnPPSTWqnDJFl_4Ua4YMV3Ll5kGNoUpQhx4Pbz9eMl3a09r0DzdO6nJCWc9exsC7opdRNiSHvaM0GG_nQ9F2vVcaklF-YsLIDF3OPIhJxd7yIxc7N9PZVhIIwZLPAudjMGBPoK1Eics4Hw7GzWorXZzHstHdgrEtVUVv4MU6WJbXZtWnCBRs4O/w800/lenguaje-pensamiento-infancia-claves-desarrollo-optimo-1733931012-1733931482.jpg" alt="Desarrollo del lenguaje">
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 02: ETAPAS DEL DESARROLLO -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h2 class="text-3xl font-black materia-title mb-8 flex items-center gap-3">
+                    <span class="text-[#ffc600]">02.</span> Etapas según Owens (2021)
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-12">
+                    <div class="etapa-card">
+                        <span class="block text-2xl mb-2">🍼</span>
+                        <h4 class="font-black text-[#005c30] text-[10px] uppercase tracking-widest mb-2">0–12 meses</h4>
+                        <p class="text-gray-500 text-[10px] leading-tight">Prelingüística: Balbuceo y gestos.</p>
+                    </div>
+                    <div class="etapa-card">
+                        <span class="block text-2xl mb-2">💬</span>
+                        <h4 class="font-black text-[#005c30] text-[10px] uppercase tracking-widest mb-2">12–18 meses</h4>
+                        <p class="text-gray-500 text-[10px] leading-tight">Holofrástica: Ideas en una sola palabra.</p>
+                    </div>
+                    <div class="etapa-card">
+                        <span class="block text-2xl mb-2">🗣️</span>
+                        <h4 class="font-black text-[#005c30] text-[10px] uppercase tracking-widest mb-2">18–24 meses</h4>
+                        <p class="text-gray-500 text-[10px] leading-tight">Dos Palabras: Combinaciones simples.</p>
+                    </div>
+                    <div class="etapa-card">
+                        <span class="block text-2xl mb-2">📢</span>
+                        <h4 class="font-black text-[#005c30] text-[10px] uppercase tracking-widest mb-2">2–3 años</h4>
+                        <p class="text-gray-500 text-[10px] leading-tight">Telegráfica: Frases cortas sin conectores.</p>
+                    </div>
+                    <div class="etapa-card">
+                        <span class="block text-2xl mb-2">📖</span>
+                        <h4 class="font-black text-[#005c30] text-[10px] uppercase tracking-widest mb-2">3–6 años</h4>
+                        <p class="text-gray-500 text-[10px] leading-tight">Sintaxis: Adquisición de reglas gramaticales.</p>
+                    </div>
+                </div>
+                <div class="image-wrapper max-w-4xl mx-auto">
+                    <!--  -->
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtcU_CBQUeqZx79Lz9nJvdK3EnuXtx0LULjPpbJcWqh61IuXYsuV71arO9tZKupcfyUIExhPp0LsT0pyVfCOQTBdo-0YUiUy0MmJm9JdGrBS6HQuxvYYqnuvn8Fb-nBepo5DMJb6yPVKkFyJIG20UmUDSPlol-BmMjVvQhUQfhtnGUoP4MBxw4fqjb1eLQ/w800/Captura%20de%20pantalla%202026-04-25%20a%20la(s)%2010.46.01.png" alt="Etapas del lenguaje">
+                </div>
+            </section>
+
+            <!-- SECCIÓN 03: ESTRATEGIAS -->
+            <section class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-up">
+                    <h2 class="text-3xl font-black materia-title mb-6 flex items-center gap-3">
+                        <span class="text-[#ffc600]">03.</span> Estrategias de Estimulación
+                    </h2>
+                    <div class="text-gray-600 leading-relaxed text-sm md:text-base space-y-6">
+                        <p class="text-justify">
+                            <span class="font-bold text-[#005c30]">Papalia y Martorell (2021)</span> sugieren intervenciones clave para potenciar ambas áreas:
+                        </p>
+                        <ul class="upec-list ml-2">
+                            <li>
+                                <span class="upec-list-bullet">✓</span> 
+                                <p><strong>Lectura compartida:</strong> Amplía significativamente el vocabulario receptivo y expresivo.</p>
+                            </li>
+                            <li>
+                                <span class="upec-list-bullet">✓</span> 
+                                <p><strong>Juego simbólico:</strong> Permite el uso creativo del lenguaje en situaciones de rol.</p>
+                            </li>
+                            <li>
+                                <span class="upec-list-bullet">✓</span> 
+                                <p><strong>Conversaciones contextualizadas:</strong> Fomentan la capacidad argumentativa temprana.</p>
+                            </li>
+                            <li>
+                                <span class="upec-list-bullet">✓</span> 
+                                <p><strong>Actividades lógicas:</strong> Clasificación y seriación que estimulan el pensamiento concreto.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-[#f0f9f4] p-8 md:p-12 rounded-[48px] border-l-8 border-[#005c30] animate-fade-up">
+                    <h3 class="text-xl font-black text-[#005c30] uppercase tracking-widest mb-4 flex items-center gap-3">
+                        <i data-lucide="alert-triangle" class="text-[#ffc600] w-6 h-6"></i> Señales de Alerta
+                    </h3>
+                    <p class="text-gray-700 text-xs md:text-sm leading-relaxed mb-4">
+                        Según <span class="font-bold">Aguilera Albesa (2020)</span>, es fundamental observar:
+                    </p>
+                    <div class="space-y-2 text-gray-600 text-[11px] md:text-xs">
+                        <p>• Ausencia de balbuceo a los 12 meses.</p>
+                        <p>• No pronunciar palabras aisladas a los 16 meses.</p>
+                        <p>• Dificultad severa para ser comprendido después de los 3 años.</p>
+                        <p>• Pérdida repentina de habilidades lingüísticas ya adquiridas.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 04: MATERIAL AUDIOVISUAL -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black materia-title mb-4">Material Audiovisual</h2>
+                    <div class="w-20 h-1.5 bg-[#ffc600] mx-auto rounded-full"></div>
+                </div>
+                <div class="max-w-4xl mx-auto">
+                    <div class="video-container group">
+                        <iframe src="https://www.youtube.com/embed/Ae5n33PC2kk" class="w-full h-full opacity-90 group-hover:opacity-100 transition-opacity" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <p class="mt-6 text-center text-gray-400 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 italic">
+                        <i data-lucide="youtube" class="text-red-600"></i> Video: Herramientas para mejorar el aprendizaje
+                    </p>
+                </div>
+            </section>
+
+            <!-- BIBLIOGRAFÍA -->
+            <section class="section-container p-8 md:p-12 animate-fade-up">
+                <h4 class="text-[#005c30] font-black text-xs uppercase tracking-[0.3em] mb-8 flex items-center gap-3">
+                    <i data-lucide="book-open" class="text-[#ffc600]"></i> Bibliografía de la Unidad
+                </h4>
+                <div class="grid md:grid-cols-2 gap-6 text-[11px] md:text-xs text-gray-500 leading-relaxed">
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Aguilera Albesa, S., y Botella Astillero, A. (2020). <em>Trastornos del lenguaje y la comunicación en la infancia.</em> Pediátrica.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Kozulin, A. (Comp.). (2020). <em>Pensamiento y lenguaje: Obras escogidas de Vygotski.</em> Paidós.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Owens, R. E. (2021). <em>Desarrollo del lenguaje</em> (8.ª ed.). Pearson Educación.</p>
+                    </div>
+                    <div class="p-5 border-l-2 border-slate-200 bg-slate-50 rounded-r-xl">
+                        <p>Papalia, D. E., y Martorell, G. (2021). <em>Desarrollo humano</em> (13.ª ed.). McGraw-Hill.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- NAVEGACIÓN INFERIOR - CORREGIDO -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-center gap-6">
+                <a href="curriculo" class="btn-outline-upec justify-center">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> VOLVER A CURRÍCULO
+                </a>
+                <a href="referencias" class="btn-primary px-10 py-4 rounded-full justify-center">
+                    FINALIZAR: REFERENCIAS <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Ko vore omoĩ pe roguy guypegua -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts Globales -->
+    <script src="main.js"></script>
+</body>
+</html>
